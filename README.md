@@ -29,6 +29,8 @@ For Mac OS you must have the following installed:
  docker-compose logs -f
  ```
  
+ Navigate to [http://localhost:4200](http://localhost:4200) to view the project.
+ 
  ## USEFUL COMMANDS
  
   * `docker-compose up -d` will build/re-build the docker container and start it in background mode
