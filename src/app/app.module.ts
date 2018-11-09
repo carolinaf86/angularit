@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RequirementsModule} from './shared/requirements.module';
 import {HttpClientModule} from '@angular/common/http';
+import {HeadersInterceptor} from './shared/http/headers-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserAnimationsModule,
     RequirementsModule
   ],
-  providers: [],
+  providers: [HeadersInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
