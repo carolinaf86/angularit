@@ -28,6 +28,7 @@ a {
 
 /* Layout */
 .angularit-container {
+  min-height: 100%;
   .cards-container {
     background-color: $background-grey;
     // TODO make container scroll-able
