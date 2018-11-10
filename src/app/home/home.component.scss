@@ -1,0 +1,13 @@
+@import '../../styles/variables';
+
+.angularit-container {
+  .cards-container {
+    background-color: $lighter-grey;
+    // TODO make container scroll-able
+    // overflow-y: auto;
+    .card {
+      margin-top: 12px;
+    }
+  }
+
+}
