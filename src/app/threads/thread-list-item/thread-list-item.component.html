@@ -1,6 +1,10 @@
 <div class="card">
   <div class="card-body">
-    <small class="float-right">
+    <div class="d-lg-none">
+      <small><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.</small>
+
+    </div>
+    <small class="float-right d-none d-lg-inline">
       <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.
     </small>
     <a class="card-title d-block" [routerLink]="'/threads/' + model.thread_id">Something Exciting!</a>
