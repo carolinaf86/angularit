@@ -25,3 +25,15 @@ a {
   }
 }
 
+
+/* Buttons */
+button.vote-btn {
+  border: none;
+  background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+}

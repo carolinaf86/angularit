@@ -34,4 +34,14 @@ export class ThreadDetailComponent implements OnInit {
     }
     ;
   }
+
+  upvote() {
+    // TODO call api
+    this.model.upvotes = this.model.upvotes ? +this.model.upvotes + 1 : 1;
+  }
+
+  downvote() {
+    // TODO call api
+    this.model.downvotes = this.model.downvotes ? +this.model.downvotes + 1 : 1;
+  }
 }

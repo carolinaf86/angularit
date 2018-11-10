@@ -2,7 +2,7 @@
 <div class="container-fluid angularit-container h-100">
   <div class="row h-100">
     <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
-      <app-thread-list-item></app-thread-list-item>
+      <app-thread-list-item *ngFor="let thread of threads" [model]="thread"></app-thread-list-item>
     </div>
   </div>
 </div>

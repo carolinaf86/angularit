@@ -1,9 +1,13 @@
 <div class="card">
   <div class="card-body">
     <small class="float-right"><fa-icon [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.</small>
-    <h5 class="card-title"><a [routerLink]="'threads/' + model.thread_id">Something Exciting!</a></h5>
+    <h5 class="card-title"><a [routerLink]="'/threads/' + model.thread_id">Something Exciting!</a></h5>
     <a [routerLink]="'/users/' + model.user_id" class="d-block"><fa-icon icon="user-circle"></fa-icon>
       {{ model.user_name }}</a>
+    <div class="votes-container float-right">
+      <button class="vote-btn" (click)="upvote()"><fa-icon icon="arrow-circle-up"></fa-icon></button> {{ model.upvotes || 0 }}
+      <button class="vote-btn" (click)="downvote()"><fa-icon icon="arrow-circle-down"></fa-icon></button> {{ model.downvotes || 0 }}
+    </div>
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div>
 </div>

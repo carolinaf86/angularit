@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {ThreadDetailComponent} from './thread/thread-detail.component';
+import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
 
 const routes: Routes = [
