@@ -10,13 +10,19 @@ import {HomeComponent} from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import {NavbarComponent} from './layout/navbar/navbar.component';
 import {ThreadListItemComponent} from './thread/thread-list-item/thread-list-item.component';
+import {ThreadDetailComponent} from './thread/thread-detail.component';
+import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';
+import {CommentComponent} from './comment/comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    ThreadListItemComponent
+    ThreadDetailComponent,
+    ThreadListItemComponent,
+    TimeDifferencePipe,
+    CommentComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,7 @@ import {ThreadListItemComponent} from './thread/thread-list-item/thread-list-ite
     RequirementsModule,
     LayoutModule
   ],
-  providers: [HeadersInterceptor],
+  providers: [HeadersInterceptor, TimeDifferencePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
