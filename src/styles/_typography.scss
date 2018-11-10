@@ -1,9 +1,19 @@
 @import 'variables';
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,700|Work+Sans');
 
-h1, h2, h3, h4, h5, h6 {
-  color: $grey;
-}
+body {
+  font-family: 'Work Sans', sans-serif;
 
-p, small {
-  color: $grey;
+  h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: $grey;
+  }
+  h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    color: $grey;
+  }
+
+  p, small {
+    color: $grey;
+  }
 }
