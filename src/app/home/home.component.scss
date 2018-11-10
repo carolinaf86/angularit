@@ -1,9 +1,8 @@
 @import '../../styles/variables';
 
 .angularit-container {
-  background-color: $lighter-grey;
-  height: 100%;
   .cards-container {
+    background-color: $lighter-grey;
     // TODO make container scroll-able
     // overflow-y: auto;
     .card {

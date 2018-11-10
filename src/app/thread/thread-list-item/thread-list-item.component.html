@@ -1,0 +1,8 @@
+<div class="card">
+  <div class="card-body">
+    <small class="float-right"><fa-icon [icon]="['far', 'clock']"></fa-icon> {{ getTimeDifferenceString() }}</small>
+    <h5 class="card-title"><a [routerLink]="'threads/' + thread.thread_id">Something Exciting!</a></h5>
+    <a [routerLink]="'users/' + thread.user_id" class="d-block"><fa-icon icon="user-circle"></fa-icon> {{ thread.user_name }}</a>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>

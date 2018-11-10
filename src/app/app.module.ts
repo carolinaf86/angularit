@@ -3,18 +3,20 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {RequirementsModule} from './shared/requirements.module';
+import {RequirementsModule} from './shared/modules/requirements.module';
 import {HttpClientModule} from '@angular/common/http';
 import {HeadersInterceptor} from './shared/http/headers-interceptor.service';
 import {HomeComponent} from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import {NavbarComponent} from './layout/navbar/navbar.component';
+import {ThreadListItemComponent} from './thread/thread-list-item/thread-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    ThreadListItemComponent
   ],
   imports: [
     BrowserModule,
