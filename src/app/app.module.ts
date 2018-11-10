@@ -18,6 +18,7 @@ import {VotesComponent} from './votes/votes.component';
 import {LoginComponent} from './login/login.component';
 import {FormlyModule} from '@ngx-formly/core';
 import {FORMLY_CONFIG} from './shared/formly-config';
+import {RegisterComponent} from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {FORMLY_CONFIG} from './shared/formly-config';
     CommentComponent,
     UserDetailComponent,
     VotesComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
