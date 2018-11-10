@@ -6,10 +6,20 @@ html, body {
 
 /* Links */
 a {
-  color: $text-grey;
+  color: $secondary;
   &:hover {
+    color: $secondary;
     text-decoration: none;
+  }
+  &.card-title {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+    font-family: $title-font;
+    font-weight: 400;
     color: $text-highlight;
+    &:hover {
+      color: $text-highlight;
+    }
   }
 }
 
@@ -32,6 +42,9 @@ button.vote-btn {
   background-color: transparent;
   &:hover {
     cursor: pointer;
+    fa-icon {
+      color: $highlight;
+    }
   }
   &:focus {
     outline: none;
