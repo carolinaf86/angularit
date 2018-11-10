@@ -1,11 +1,11 @@
 @import '../../../styles/variables';
 
 nav.navbar {
-  background-color: $grey;
+  background-color: $primary;
   .navbar-brand {
     text-transform: uppercase;
     font-weight: 700;
-    color: $mint-green;
+    color: $highlight;
     letter-spacing: 3px;
     font-family: 'Monserrat', sans-serif;
     span {

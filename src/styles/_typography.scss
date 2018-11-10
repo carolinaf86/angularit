@@ -4,16 +4,12 @@
 body {
   font-family: 'Work Sans', sans-serif;
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
-    color: $grey;
-  }
-  h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
-    color: $grey;
+    color: $text-highlight;
   }
 
   p, small {
-    color: $grey;
+    color: $text-grey;
   }
 }

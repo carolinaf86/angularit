@@ -6,17 +6,17 @@ html, body {
 
 /* Links */
 a {
-  color: $grey;
+  color: $text-grey;
   &:hover {
     text-decoration: none;
-    color: $dark-grey
+    color: $text-highlight;
   }
 }
 
 /* Layout */
 .angularit-container {
   .cards-container {
-    background-color: $lighter-grey;
+    background-color: $background-grey;
     // TODO make container scroll-able
     // overflow-y: auto;
     .card {
@@ -35,5 +35,18 @@ button.vote-btn {
   }
   &:focus {
     outline: none;
+  }
+}
+
+/* Icons */
+fa-icon {
+  &.user-icon {
+    color: $secondary;
+  }
+  &.clock-icon {
+    color: $secondary;
+  }
+  &.vote-icon {
+    color: $primary;
   }
 }
