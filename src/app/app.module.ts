@@ -9,10 +9,10 @@ import {HeadersInterceptor} from './shared/http/headers-interceptor.service';
 import {HomeComponent} from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import {NavbarComponent} from './layout/navbar/navbar.component';
-import {ThreadListItemComponent} from './thread/thread-list-item/thread-list-item.component';
-import {ThreadDetailComponent} from './thread/thread-detail.component';
+import {ThreadListItemComponent} from './threads/thread-list-item/thread-list-item.component';
+import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';
-import {CommentComponent} from './comment/comment.component';
+import {CommentComponent} from './comments/comment.component';
 import { UserDetailComponent } from './users/user-detail.component';
 
 @NgModule({
