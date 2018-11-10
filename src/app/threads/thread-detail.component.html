@@ -11,7 +11,8 @@
         </button> {{ model.downvotes || 0 }}
       </div>
       <h3>{{ model.thread_title }}</h3>
-      <a [routerLink]="'/users/' + model.user_id" class="d-block"><fa-icon class="user-icon" icon="user-circle"></fa-icon> {{ model.user_name }}</a>
+      <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+      <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
       <p><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.</p>
       <p class="thread-body">{{ model.thread_body }}</p>
     </div>

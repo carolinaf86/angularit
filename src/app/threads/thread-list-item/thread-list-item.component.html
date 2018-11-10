@@ -3,9 +3,9 @@
     <small class="float-right">
       <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.
     </small>
-    <a class="card-title" [routerLink]="'/threads/' + model.thread_id">Something Exciting!</a>
-    <a [routerLink]="'/users/' + model.user_id" class="d-block user-link"><fa-icon class="user-icon" icon="user-circle"></fa-icon>
-      {{ model.user_name }}</a>
+    <a class="card-title d-block" [routerLink]="'/threads/' + model.thread_id">Something Exciting!</a>
+    <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+    <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
     <div class="votes-container float-right">
       <button class="vote-btn" (click)="upvote()">
         <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon>
