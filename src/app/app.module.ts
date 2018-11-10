@@ -14,6 +14,7 @@ import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';
 import {CommentComponent} from './comments/comment.component';
 import { UserDetailComponent } from './users/user-detail.component';
+import {VotesComponent} from './votes/votes.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { UserDetailComponent } from './users/user-detail.component';
     ThreadListItemComponent,
     TimeDifferencePipe,
     CommentComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    VotesComponent
   ],
   imports: [
     BrowserModule,
