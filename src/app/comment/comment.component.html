@@ -1,0 +1,7 @@
+<div class="card">
+  <div class="card-body">
+    <a [routerLink]="'/users/' + model.user_id" class="d-block"><fa-icon icon="user-circle"></fa-icon> {{ model.user_name }}</a>
+    <small class="d-block"><fa-icon [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
+    <p class="card-text">{{ model.comment_body }}</p>
+  </div>
+</div>

@@ -3,11 +3,12 @@
   <div class="row h-100">
     <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 thread-detail">
       <h3>{{ model.thread_title }}</h3>
-      <a [routerLink]="'users/' + model.user_id" class="d-block"><fa-icon icon="user-circle"></fa-icon> {{ model.user_name }}</a>
+      <a [routerLink]="'/users/' + model.user_id" class="d-block"><fa-icon icon="user-circle"></fa-icon> {{ model.user_name }}</a>
       <p><fa-icon [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.</p>
+      <p class="thread-body">{{ model.thread_body }}</p>
     </div>
     <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
-      <app-thread-list-item></app-thread-list-item>
+      <app-comment *ngFor="let comment of model.comments" [model]="comment"></app-comment>
     </div>
   </div>
 </div>
