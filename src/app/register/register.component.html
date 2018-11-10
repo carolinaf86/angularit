@@ -6,8 +6,8 @@
         <div class="card-body">
           <form [formGroup]="form" (ngSubmit)="submit(model)">
             <formly-form [form]="form" [fields]="fields" [model]="model">
-              <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Login</button>
-              <small class="pl-3">Don't have an account yet? Sign up <a routerLink="/register">here</a>.</small>
+              <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Sign up</button>
+              <small class="pl-3">Already have an account? Go to <a routerLink="/login">login</a>.</small>
             </formly-form>
           </form>
         </div>

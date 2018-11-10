@@ -3,13 +3,21 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
 import {FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: 'login.component.html',
-  styleUrls: ['login.component.scss']
+  selector: 'app-register',
+  templateUrl: 'register.component.html',
+  styleUrls: ['register.component.scss']
 })
-export class LoginComponent {
+export class RegisterComponent {
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [
+    {
+      key: 'user_name',
+      type: 'input',
+      templateOptions: {
+        placeholder: 'Username',
+        required: true
+      }
+    },
     {
       key: 'email',
       type: 'input',
@@ -38,8 +46,8 @@ export class LoginComponent {
   }
 
   submit() {
-    console.log('logging in');
-    // TODO set logged user
+    console.log('Registering new user and logging in');
+    // TODO create user and log in
   }
 
 }

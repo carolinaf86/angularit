@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
 import {LoginComponent} from './login/login.component';
+import {RegisterComponent} from './register/register.component';
 import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
 import {UserThreadsResolverService} from './shared/resolvers/user-threads-resolver.service';
 import {ThreadsResolverService} from './shared/resolvers/threads-resolver.service';
@@ -17,10 +18,16 @@ const routes: Routes = [
     path: 'login', component: LoginComponent
   },
   {
+    path: 'register', component: RegisterComponent
+  },
+  {
     path: 'threads/:id', component: ThreadDetailComponent, resolve: { thread: ThreadResolverService }
   },
   {
     path: 'users/:id', component: UserDetailComponent, resolve: { user: UserDetailResolver, threads: UserThreadsResolverService }
+    },
+  {
+    path: '**', redirectTo: ''
   }
 ];
 
