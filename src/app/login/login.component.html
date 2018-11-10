@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<div class="container-fluid angularit-container">
+  <div class="row">
+    <div class="col-lg-4 offset-lg-4">
+      <div class="card mt-5">
+        <div class="card-body">
+          <form [formGroup]="form" (ngSubmit)="submit(model)">
+            <formly-form [form]="form" [fields]="fields" [model]="model">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </formly-form>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

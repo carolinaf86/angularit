@@ -15,6 +15,9 @@ import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';
 import {CommentComponent} from './comments/comment.component';
 import { UserDetailComponent } from './users/user-detail.component';
 import {VotesComponent} from './votes/votes.component';
+import {LoginComponent} from './login/login.component';
+import {FormlyModule} from '@ngx-formly/core';
+import {FORMLY_CONFIG} from './shared/formly-config';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import {VotesComponent} from './votes/votes.component';
     TimeDifferencePipe,
     CommentComponent,
     UserDetailComponent,
-    VotesComponent
+    VotesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import {VotesComponent} from './votes/votes.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     RequirementsModule,
-    LayoutModule
+    LayoutModule,
+    FormlyModule.forRoot(FORMLY_CONFIG)
   ],
   providers: [HeadersInterceptor, TimeDifferencePipe],
   bootstrap: [AppComponent]
