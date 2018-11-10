@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Work+Sans');
+
 /* Colors */
+$primary: #47DBBC;
+$secondary: #9F84BD;
+$highlight: #C2F970;
+$text-grey: #626868;
+$text-highlight: #484C4C;
+$background-grey: #F7EBEC;
+
 $black: #000000;
-$dark-grey: #181818;
-$grey: #4a4a4a;
-$light-grey: #9b9b9b;
-$lighter-grey: #d3d3d3;
 $white: #FFFFFF;
-$mint-green: #85f6b6;
+
+/* Fonts */
+$main-font: 'Work Sans', sans-serif;
+$title-font: 'Montserrat', sans-serif;

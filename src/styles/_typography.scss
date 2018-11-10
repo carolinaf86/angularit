@@ -1,9 +1,15 @@
 @import 'variables';
 
-h1, h2, h3, h4, h5, h6 {
-  color: $grey;
-}
+body {
+  font-family: $main-font;
 
-p, small {
-  color: $grey;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $title-font;
+    color: $text-highlight;
+    font-weight: 400;
+  }
+
+  p, small {
+    color: $text-grey;
+  }
 }

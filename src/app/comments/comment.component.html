@@ -1,11 +1,15 @@
 <div class="card">
   <div class="card-body">
     <div class="votes-container float-right">
-      <button class="vote-btn" (click)="upvote()"><fa-icon icon="arrow-circle-up"></fa-icon></button> {{ model.upvotes || 0 }}
-      <button class="vote-btn" (click)="downvote()"><fa-icon icon="arrow-circle-down"></fa-icon></button> {{ model.downvotes || 0 }}
+      <button class="vote-btn" (click)="upvote()">
+        <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon>
+      </button> {{ model.upvotes || 0 }}
+      <button class="vote-btn" (click)="downvote()">
+        <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon>
+      </button> {{ model.downvotes || 0 }}
     </div>
-    <a [routerLink]="'/users/' + model.user_id" class="d-block"><fa-icon icon="user-circle"></fa-icon> {{ model.user_name }}</a>
-    <small class="d-block"><fa-icon [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
+    <a [routerLink]="'/users/' + model.user_id" class="d-block"><fa-icon class="user-icon" icon="user-circle"></fa-icon> {{ model.user_name }}</a>
+    <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
     <p class="card-text">{{ model.comment_body }}</p>
   </div>
 </div>

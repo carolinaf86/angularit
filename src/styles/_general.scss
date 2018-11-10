@@ -6,17 +6,27 @@ html, body {
 
 /* Links */
 a {
-  color: $grey;
+  color: $secondary;
   &:hover {
+    color: $secondary;
     text-decoration: none;
-    color: $dark-grey
+  }
+  &.card-title {
+    font-size: 1.5rem !important;
+    line-height: 1.2;
+    font-family: $title-font;
+    font-weight: 400;
+    color: $text-highlight;
+    &:hover {
+      color: $text-highlight;
+    }
   }
 }
 
 /* Layout */
 .angularit-container {
   .cards-container {
-    background-color: $lighter-grey;
+    background-color: $background-grey;
     // TODO make container scroll-able
     // overflow-y: auto;
     .card {
@@ -32,8 +42,24 @@ button.vote-btn {
   background-color: transparent;
   &:hover {
     cursor: pointer;
+    fa-icon {
+      color: $highlight;
+    }
   }
   &:focus {
     outline: none;
+  }
+}
+
+/* Icons */
+fa-icon {
+  &.user-icon {
+    color: $secondary;
+  }
+  &.clock-icon {
+    color: $secondary;
+  }
+  &.vote-icon {
+    color: $primary;
   }
 }
