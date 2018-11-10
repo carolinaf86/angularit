@@ -13,6 +13,7 @@ import {ThreadListItemComponent} from './thread/thread-list-item/thread-list-ite
 import {ThreadDetailComponent} from './thread/thread-detail.component';
 import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';
 import {CommentComponent} from './comment/comment.component';
+import { UserDetailComponent } from './users/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {CommentComponent} from './comment/comment.component';
     ThreadDetailComponent,
     ThreadListItemComponent,
     TimeDifferencePipe,
-    CommentComponent
+    CommentComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
