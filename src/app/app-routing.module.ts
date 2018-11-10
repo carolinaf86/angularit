@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
+import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     path: 'threads/:id', component: ThreadDetailComponent
   },
   {
-    path: 'users/:id', component: UserDetailComponent
+    path: 'users/:id', component: UserDetailComponent, resolve: { user: UserDetailResolver }
   }
 ];
 

@@ -1,15 +1,18 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User, UserInterface} from '../models/User';
 import {ThreadInterface} from '../models/Thread';
 import {CommentInterface} from '../models/Comment';
+import {catchError, map} from 'rxjs/operators';
+import {throwError} from 'rxjs';
+import {ErrorService} from './error.service';
 
 @Injectable()
 export class UserService {
 
   baseUrl = 'https://cb37942.whatsalon.com/api/Account';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errorService: ErrorService) { }
 
   url(pathSegments: [string | number], queryParams?: string): string {
     pathSegments.unshift(this.baseUrl);
@@ -20,12 +23,20 @@ export class UserService {
 
   getUserById(id: number) {
     const url = this.url(['get_user_profile'], `user_id=${id}`);
-    return this.http.get<UserInterface>(url);
+    return this.http.get(url)
+      .pipe(
+        map(res => {
+          console.log('Res', res);
+          return res['message'];
+        }),
+        catchError(this.errorService.handleError)
+      );
   }
 
   getUserThreadHistoryById(id: number) {
     const url = this.url(['get_user_thread_history'], `user_id=${id}`);
-    return this.http.get<ThreadInterface[]>(url);
+    return this.http.get<ThreadInterface[]>(url)
+      .pipe(map(res => res['message']));
   }
 
   getUserCommentHistoryById(id: number) {
