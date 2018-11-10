@@ -2,10 +2,10 @@
 declare var Object: any;
 
 export interface UserInterface {
-  id?: number;
-  email: string;
-  password: string;
-  user_name: string;
+  user_id?: number;
+  email?: string;
+  password?: string;
+  user_name?: string;
   registration_timestamp?: string;
   upvotes?: number;
   downvotes?: number;
@@ -16,10 +16,10 @@ export interface UserInterface {
 }
 
 export class User implements UserInterface {
-  id?: number;
-  email: string;
-  password: string;
-  user_name: string;
+  user_id?: number;
+  email?: string;
+  password?: string;
+  user_name?: string;
   registration_timestamp?: string;
   upvotes?: number;
   downvotes?: number;
