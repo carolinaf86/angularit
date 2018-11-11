@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
 import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
+import {UserThreadsResolverService} from './shared/resolvers/user-threads-resolver.service';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
     path: 'threads/:id', component: ThreadDetailComponent
   },
   {
-    path: 'users/:id', component: UserDetailComponent, resolve: { user: UserDetailResolver }
+    path: 'users/:id', component: UserDetailComponent, resolve: { user: UserDetailResolver, threads: UserThreadsResolverService }
   }
 ];
 

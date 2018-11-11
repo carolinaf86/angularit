@@ -25,10 +25,7 @@ export class UserService {
     const url = this.url(['get_user_profile'], `user_id=${id}`);
     return this.http.get(url)
       .pipe(
-        map(res => {
-          console.log('Res', res);
-          return res['message'];
-        }),
+        map(res => res['message']),
         catchError(this.errorService.handleError)
       );
   }
@@ -36,7 +33,8 @@ export class UserService {
   getUserThreadHistoryById(id: number) {
     const url = this.url(['get_user_thread_history'], `user_id=${id}`);
     return this.http.get<ThreadInterface[]>(url)
-      .pipe(map(res => res['message']));
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
   }
 
   getUserCommentHistoryById(id: number) {
