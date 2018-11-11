@@ -18,6 +18,7 @@ import {UserService} from './shared/sdk/services/user.service';
 import {httpInterceptorProviders} from './shared/http-interceptors';
 import {ErrorService} from './shared/sdk/services/error.service';
 import {VotesComponent} from './votes/votes.component';
+import {ThreadService} from './shared/sdk/services/thread.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,14 @@ import {VotesComponent} from './votes/votes.component';
     RequirementsModule,
     LayoutModule
   ],
-  providers: [httpInterceptorProviders, TimeDifferencePipe, UserDetailResolver, UserService, ErrorService],
+  providers: [
+    httpInterceptorProviders,
+    TimeDifferencePipe,
+    UserDetailResolver,
+    UserService,
+    ErrorService,
+    ThreadService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
