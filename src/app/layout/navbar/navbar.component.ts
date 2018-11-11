@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LoggedService} from '../../shared/services/logged.service';
 
 @Component({
@@ -13,7 +13,10 @@ import {LoggedService} from '../../shared/services/logged.service';
       <div [ngbCollapse]="isCollapsed" class="navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-lg-auto">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/login">Log in</a>
+            <a *ngIf="!loggedUserId;else logoutLink" class="nav-link" routerLink="/login">Log in</a>
+            <ng-template #logoutLink>
+              <a class="nav-link" (click)="logout()">Logout</a>
+            </ng-template>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/register">Register</a>
@@ -27,8 +30,19 @@ import {LoggedService} from '../../shared/services/logged.service';
   `,
   styleUrls: ['navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  @Output() loggedOut: EventEmitter<boolean> = new EventEmitter<boolean>();
   isCollapsed = false;
-  @Input() loggedUserId: string;
-  constructor() { }
+  loggedUserId: string;
+  constructor(private loggedService: LoggedService) { }
+
+  ngOnInit(): void {
+    this.loggedUserId = this.loggedService.getLoggedUserId();
+  }
+
+  logout() {
+    this.loggedService.clearLoggedUser();
+    this.loggedUserId = null;
+    this.loggedOut.emit(true);
+  }
 }

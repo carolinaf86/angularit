@@ -13,7 +13,7 @@ export class UserDetailComponent implements OnInit {
 
   model: User;
   threads: Thread[];
-  loggedUserId: string;
+  isLoggedIn: boolean;
 
   constructor(private route: ActivatedRoute, private loggedService: LoggedService) {
   }
@@ -24,9 +24,13 @@ export class UserDetailComponent implements OnInit {
       this.model = data.user;
       this.threads = data.threads;
     });
-    this.loggedUserId = this.loggedService.getLoggedUserId();
-    console.log('Logged in', this.loggedUserId);
+    this.isLoggedIn = this.loggedService.isLoggedIn();
+    console.log('Logged in', this.isLoggedIn);
 
+  }
+
+  onLoggedOut() {
+    this.isLoggedIn = false;
   }
 
 }

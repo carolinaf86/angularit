@@ -11,41 +11,39 @@ export class LoggedService {
 
   constructor() { }
 
-  setLoggedUser(authToken: AuthToken) {
-    this.authToken = authToken.auth_token;
-    this.loggedUserId = authToken.id;
+  public setLoggedUser(authToken: AuthToken) {
+    const { auth_token, id } = authToken;
+    this.authToken = auth_token;
+    this.loggedUserId = id.toString();
+    // Also store in local storage
+    localStorage.setItem('authToken', auth_token);
+    localStorage.setItem('loggedUserId', id.toString());
   }
 
-  clearLoggedUser() {
+  public clearLoggedUser() {
     this.clearAuthToken();
     this.clearLoggedUserId();
   }
 
-  getLoggedUserId() {
+  public getLoggedUserId() {
     return this.loggedUserId || localStorage.getItem('loggedUserId');
   }
 
-  set authToken(authToken: string) {
-    // Also store in local storage
-    localStorage.setItem('authToken', authToken);
+  public isLoggedIn() {
+    return !!(this.authToken || localStorage.getItem('authToken'));
   }
 
-  getAuthToken(): string {
+  public getAuthToken(): string {
     return this.authToken || localStorage.getItem('authToken');
   }
 
-  clearAuthToken() {
+  private clearAuthToken() {
     this.authToken = null;
     // Remove from local storage
     localStorage.removeItem('authToken');
   }
 
-  set loggedUserId(id: string) {
-    // Also store in local storage
-    localStorage.setItem('loggedUserId', id);
-  }
-
-  clearLoggedUserId() {
+  private clearLoggedUserId() {
     this.loggedUserId = null;
     // Remove from local storage
     localStorage.removeItem('loggedUserId');
