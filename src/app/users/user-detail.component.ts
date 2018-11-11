@@ -13,18 +13,19 @@ export class UserDetailComponent implements OnInit {
 
   model: User;
   threads: Thread[];
-  loggedIn: boolean;
+  loggedUserId: string;
 
   constructor(private route: ActivatedRoute, private loggedService: LoggedService) {
   }
+
   ngOnInit() {
 
     this.route.data.subscribe((data: {user: User, threads: Thread[]}) => {
       this.model = data.user;
       this.threads = data.threads;
     });
-    this.loggedIn = !!this.loggedService.getAuthToken();
-    console.log('Logged in', this.loggedIn);
+    this.loggedUserId = this.loggedService.getLoggedUserId();
+    console.log('Logged in', this.loggedUserId);
 
   }
 

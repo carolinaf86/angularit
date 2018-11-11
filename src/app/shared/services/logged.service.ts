@@ -21,6 +21,10 @@ export class LoggedService {
     this.clearLoggedUserId();
   }
 
+  getLoggedUserId() {
+    return this.loggedUserId || localStorage.getItem('loggedUserId');
+  }
+
   set authToken(authToken: string) {
     // Also store in local storage
     localStorage.setItem('authToken', authToken);
@@ -39,10 +43,6 @@ export class LoggedService {
   set loggedUserId(id: string) {
     // Also store in local storage
     localStorage.setItem('loggedUserId', id);
-  }
-
-  get loggedUserId(): string {
-    return this.loggedUserId || localStorage.getItem('loggedUserId');
   }
 
   clearLoggedUserId() {

@@ -11,7 +11,7 @@ import {LoggedService} from '../shared/services/logged.service';
 export class ThreadDetailComponent implements OnInit {
 
   model: Thread;
-  loggedIn: boolean;
+  loggedUserId: string;
 
   constructor(private route: ActivatedRoute, private loggedService: LoggedService) {
   }
@@ -20,7 +20,7 @@ export class ThreadDetailComponent implements OnInit {
     this.route.data.subscribe((data: {thread: Thread}) => {
       this.model = data.thread;
     });
-    this.loggedIn = !!this.loggedService.getAuthToken();
-    console.log('Logged in', this.loggedIn);
+    this.loggedUserId = this.loggedService.getLoggedUserId();
+    console.log('Logged in', this.loggedUserId);
   }
 }
