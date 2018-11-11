@@ -6,7 +6,7 @@ import {Comment} from '../models/Comment';
 import {catchError, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {ErrorService} from './error.service';
-import {AuthToken} from '../models/AuthToken';
+import {AuthToken} from '../models/Auth';
 
 @Injectable({
   providedIn: 'root'

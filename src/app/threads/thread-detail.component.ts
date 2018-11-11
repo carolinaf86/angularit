@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute} from '@angular/router';
+import {LoggedService} from '../shared/services/logged.service';
 
 @Component({
   selector: 'app-thread-detail',
@@ -8,14 +9,18 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['thread-detail.component.scss']
 })
 export class ThreadDetailComponent implements OnInit {
-  model: Thread;
 
-  constructor(private route: ActivatedRoute) {
+  model: Thread;
+  loggedIn: boolean;
+
+  constructor(private route: ActivatedRoute, private loggedService: LoggedService) {
   }
 
   ngOnInit(): void {
     this.route.data.subscribe((data: {thread: Thread}) => {
       this.model = data.thread;
     });
+    this.loggedIn = !!this.loggedService.getAuthToken();
+    console.log('Logged in', this.loggedIn);
   }
 }

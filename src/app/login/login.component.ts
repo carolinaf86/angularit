@@ -1,6 +1,9 @@
 import {Component} from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {FormGroup, Validators} from '@angular/forms';
+import {UserService} from '../shared/sdk/services/user.service';
+import {AuthToken, Credentials} from '../shared/sdk/models/Auth';
+import {LoggedService} from '../shared/services/logged.service';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +11,7 @@ import {FormGroup, Validators} from '@angular/forms';
   styleUrls: ['login.component.scss']
 })
 export class LoginComponent {
+  model = new Credentials();
   form = new FormGroup({});
   fields: FormlyFieldConfig[] = [
     {
@@ -33,13 +37,18 @@ export class LoginComponent {
     }
   ];
 
-  constructor() {
+  constructor(private userService: UserService, private loggedService: LoggedService) { }
 
-  }
-
-  submit() {
-    console.log('logging in');
-    // TODO set logged user
+  submit(data) {
+    this.userService.login(data)
+      .subscribe((result: AuthToken) => {
+        // Check if user has been found
+        if (!result.auth_token) {
+          // TODO deal with error
+        } else {
+          this.loggedService.setLoggedUser(result);
+        }
+      });
   }
 
 }
