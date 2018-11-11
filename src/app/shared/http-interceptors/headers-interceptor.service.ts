@@ -8,8 +8,8 @@ export class HeadersInterceptor implements HttpInterceptor {
     Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
-        ContentType: 'application/json',
-        AcceptType: 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
     });
     // TODO add auth token from local storage

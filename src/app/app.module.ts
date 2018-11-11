@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RequirementsModule} from './shared/modules/requirements.module';
 import {HttpClientModule} from '@angular/common/http';
-import {HeadersInterceptor} from './shared/http/headers-interceptor.service';
 import {HomeComponent} from './home/home.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import {NavbarComponent} from './layout/navbar/navbar.component';
@@ -14,7 +13,12 @@ import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';
 import {CommentComponent} from './comments/comment.component';
 import { UserDetailComponent } from './users/user-detail.component';
+import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
+import {UserService} from './shared/sdk/services/user.service';
+import {httpInterceptorProviders} from './shared/http-interceptors';
+import {ErrorService} from './shared/sdk/services/error.service';
 import {VotesComponent} from './votes/votes.component';
+import {ThreadService} from './shared/sdk/services/thread.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import {VotesComponent} from './votes/votes.component';
     RequirementsModule,
     LayoutModule
   ],
-  providers: [HeadersInterceptor, TimeDifferencePipe],
+  providers: [
+    httpInterceptorProviders,
+    TimeDifferencePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

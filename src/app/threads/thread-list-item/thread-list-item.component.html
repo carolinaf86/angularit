@@ -11,7 +11,7 @@
     <fa-icon class="user-icon" icon="user-circle"></fa-icon>
     <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
 
-    <app-votes class="float-right" [model]="model"></app-votes>
+    <app-votes class="float-right" [model]="model" type="thread"></app-votes>
 
     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
   </div>

@@ -3,16 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
+import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
+import {UserThreadsResolverService} from './shared/resolvers/user-threads-resolver.service';
+import {ThreadsResolverService} from './shared/resolvers/threads-resolver.service';
+import {ThreadResolverService} from './shared/resolvers/thread-resolver.service';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: '', component: HomeComponent, resolve: { threads: ThreadsResolverService }
   },
   {
-    path: 'threads/:id', component: ThreadDetailComponent
+    path: 'threads/:id', component: ThreadDetailComponent, resolve: { thread: ThreadResolverService }
   },
   {
-    path: 'users/:id', component: UserDetailComponent
+    path: 'users/:id', component: UserDetailComponent, resolve: { user: UserDetailResolver, threads: UserThreadsResolverService }
   }
 ];
 

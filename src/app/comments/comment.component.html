@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <app-votes class="float-right" [model]="model"></app-votes>
+    <app-votes class="float-right" [model]="model" type="comment"></app-votes>
     <fa-icon class="user-icon" icon="user-circle"></fa-icon>
     <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
     <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
