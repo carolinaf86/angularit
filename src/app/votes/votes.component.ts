@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {Comment} from '../shared/sdk/models/Comment';
+import {ThreadService} from '../shared/sdk/services/thread.service';
+import {CommentService} from '../shared/sdk/services/comment.service';
 
 @Component({
   selector: 'app-votes',
@@ -20,16 +22,26 @@ export class VotesComponent {
   @Input() model: Thread | Comment;
   @Input() type: 'thread' | 'comment';
 
-  constructor() { }
+  constructor(private threadService: ThreadService, private commentService: CommentService) { }
 
   upvote() {
-    // TODO call api dependent on type
-    this.model.upvotes = this.model.upvotes ? +this.model.upvotes + 1 : 1;
+    const { model, threadService, commentService, type } = this;
+    const observable = type === 'thread'
+      ? threadService.upvote(model['thread_id'])
+      : commentService.upvote(model['comment_id']);
+    observable.subscribe((data: Thread | Comment) => {
+      this.model = data;
+    });
   }
 
   downvote() {
-    // TODO call api
-    this.model.downvotes = this.model.downvotes ? +this.model.downvotes + 1 : 1;
+    const { model, threadService, commentService, type } = this;
+    const observable = type === 'thread'
+      ? threadService.downvote(model['thread_id'])
+      : commentService.downvote(model['comment_id']);
+    observable.subscribe((data: Thread | Comment) => {
+      this.model = data;
+    });
   }
 
 }
