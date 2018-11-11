@@ -22,12 +22,6 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent
   },
   {
-    path: 'login', component: LoginComponent
-  },
-  {
-    path: 'register', component: RegisterComponent
-  },
-  {
     path: 'threads/:id', component: ThreadDetailComponent, resolve: { thread: ThreadResolverService }
   },
   {
