@@ -56,4 +56,18 @@ export class ThreadService {
         catchError(this.errorService.handleError));
   }
 
+  create(data: Thread): Observable<Thread> {
+    const url = this.url([this.resourceName, 'create']);
+    return this.http.post<Thread>(url, data)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
+  update(data: Thread): Observable<Thread> {
+    const url = this.url([this.resourceName, 'update']);
+    return this.http.post<Thread>(url, data)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
 }

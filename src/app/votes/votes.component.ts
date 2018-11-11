@@ -29,7 +29,7 @@ export class VotesComponent {
     const observable = type === 'thread'
       ? threadService.upvote(model['thread_id'])
       : commentService.upvote(model['comment_id']);
-    observable.subscribe((data: Thread | Comment) => {
+    observable.subscribe((data: {}) => {
       this.model = data;
     });
   }
