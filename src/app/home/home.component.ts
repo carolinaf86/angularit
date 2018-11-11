@@ -14,44 +14,9 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // TODO dynamic data from route
-    this.threads = [
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      },
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      },
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      },
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      },
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      },
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      },
-      {
-        user_id: 1,
-        user_name: 'User123',
-        timestamp: '2018-11-08 16:43:09'
-      }
-    ];
+    this.route.data.subscribe((data: {threads: Thread[]}) => {
+      this.threads = data.threads;
+    });
   }
 
 

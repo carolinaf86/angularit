@@ -8,7 +8,9 @@ import {Observable} from 'rxjs';
 import {ErrorService} from './error.service';
 import {AuthToken} from '../models/AuthToken';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
 
   baseUrl = 'https://cb37942.whatsalon.com/api';

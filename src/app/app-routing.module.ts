@@ -5,10 +5,11 @@ import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
 import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
 import {UserThreadsResolverService} from './shared/resolvers/user-threads-resolver.service';
+import {ThreadsResolverService} from './shared/resolvers/threads-resolver.service';
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: '', component: HomeComponent, resolve: { threads: ThreadsResolverService }
   },
   {
     path: 'threads/:id', component: ThreadDetailComponent

@@ -7,7 +7,9 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {ErrorService} from './error.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ThreadService {
 
   baseUrl = 'https://cb37942.whatsalon.com/api';

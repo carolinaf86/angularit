@@ -42,11 +42,7 @@ import {ThreadService} from './shared/sdk/services/thread.service';
   ],
   providers: [
     httpInterceptorProviders,
-    TimeDifferencePipe,
-    UserDetailResolver,
-    UserService,
-    ErrorService,
-    ThreadService
+    TimeDifferencePipe
   ],
   bootstrap: [AppComponent]
 })
