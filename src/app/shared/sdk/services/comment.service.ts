@@ -47,4 +47,18 @@ export class CommentService {
         catchError(this.errorService.handleError));
   }
 
+  create(data: Comment): Observable<Comment> {
+    const url = this.url([this.resourceName, 'create']);
+    return this.http.post<Comment>(url, data)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
+  update(data: Comment): Observable<Comment> {
+    const url = this.url([this.resourceName, 'edit']);
+    return this.http.post<Comment>(url, data)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
 }

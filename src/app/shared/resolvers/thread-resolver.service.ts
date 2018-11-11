@@ -13,7 +13,6 @@ export class ThreadResolverService implements Resolve<Thread> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Thread> | Observable<never> {
     const id = route.params['id'];
-    console.log('Resolving thread', id);
     if (id === 'add') {
       return of(new Thread());
     }

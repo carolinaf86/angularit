@@ -6,6 +6,7 @@ import {Credentials} from '../shared/sdk/models/Auth';
 import {FormGroup, Validators} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {ThreadService} from '../shared/sdk/services/thread.service';
+import {Comment, Comment} from '../shared/sdk/models/Comment';
 
 @Component({
   selector: 'app-thread-detail',
@@ -14,34 +15,38 @@ import {ThreadService} from '../shared/sdk/services/thread.service';
 })
 export class ThreadDetailComponent implements OnInit {
 
+  model: Thread;
+  addComment: Comment;
+
+  form = new FormGroup({});
+  fields: FormlyFieldConfig[];
+
+  isLoggedIn: boolean;
   editing: boolean;
   showActions: boolean;
-  model: Thread;
-  isLoggedIn: boolean;
-  form = new FormGroup({});
-  fields: FormlyFieldConfig[] = [
-    {
-      key: 'thread_title',
-      type: 'textarea',
-      templateOptions: {
-        label: 'Title',
-        placeholder: 'Add title',
-        required: true,
-        rows: 3
-      }
-    },
-    {
-      key: 'thread_body',
-      type: 'textarea',
-      templateOptions: {
-        label: 'Body',
-        placeholder: 'Add more information...',
-        rows: 6
-      }
-    }
-  ];
 
   constructor(private route: ActivatedRoute, private loggedService: LoggedService, private threadService: ThreadService) {
+    this.fields = [
+      {
+        key: 'thread_title',
+        type: 'textarea',
+        templateOptions: {
+          label: 'Title',
+          placeholder: 'Add title',
+          required: true,
+          rows: 3
+        }
+      },
+      {
+        key: 'thread_body',
+        type: 'textarea',
+        templateOptions: {
+          label: 'Body',
+          placeholder: 'Add more information...',
+          rows: 6
+        }
+      }
+    ];
   }
 
   ngOnInit(): void {
@@ -51,6 +56,7 @@ export class ThreadDetailComponent implements OnInit {
 
     this.route.data.subscribe((data: { thread: Thread }) => {
       this.model = data.thread;
+      this.addComment = new Comment({thread_id: data.thread.thread_id});
       this.showActions = this.model.user_id === this.loggedService.getLoggedUserId();
     });
 
