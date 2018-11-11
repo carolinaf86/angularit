@@ -33,18 +33,33 @@ a {
     background-color: $background-grey;
     // TODO make container scroll-able
     // overflow-y: auto;
-    .card {
-      margin-top: 12px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
+  }
+  .card {
+    margin-top: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 
-
 /* Buttons */
+#angular-it {
+  height: 100%;
+  .btn-primary {
+    background-color: $primary;
+    border-color: $primary;
+    font-weight: 700;
+    &:focus {
+      box-shadow: 0 0 0 2px $highlight;
+    }
+  }
+  .btn-secondary {
+    background-color: $secondary;
+  }
+}
+
 div.votes-container {
   font-size: 1.1rem;
 }
+
 button.vote-btn {
   border: none;
   background-color: transparent;

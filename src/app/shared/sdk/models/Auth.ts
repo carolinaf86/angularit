@@ -12,3 +12,16 @@ export class AuthToken implements AuthTokenInterface {
     Object.assign(this, data);
   }
 }
+
+export interface CredentialsInterface {
+  email?: string;
+  password?: string;
+}
+
+export class Credentials {
+  email?: string;
+  password?: string;
+  constructor(data?: CredentialsInterface) {
+    Object.assign(this, data);
+  }
+}

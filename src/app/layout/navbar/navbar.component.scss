@@ -13,4 +13,10 @@ nav.navbar {
       font-weight: bold;
     }
   }
+  #navbarNav {
+    ul li a {
+      color: $highlight;
+      font-weight: 800;
+    }
+  }
 }
