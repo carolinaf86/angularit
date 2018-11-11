@@ -4,6 +4,7 @@ import {FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../shared/sdk/services/user.service';
 import {AuthToken, Credentials} from '../shared/sdk/models/Auth';
 import {LoggedService} from '../shared/services/logged.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -36,8 +37,13 @@ export class LoginComponent {
       }
     }
   ];
+  private returnUrl: string;
 
-  constructor(private userService: UserService, private loggedService: LoggedService) { }
+  constructor(private userService: UserService, private loggedService: LoggedService, private route: ActivatedRoute,
+              private router: Router) {
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
   submit(data) {
     this.userService.login(data)
@@ -46,9 +52,14 @@ export class LoginComponent {
         if (!result.auth_token) {
           // TODO deal with error
         } else {
+          // TODO notify
           this.loggedService.setLoggedUser(result);
+          this.router.navigateByUrl(this.returnUrl);
         }
-      });
+      },
+        err => {
+          // TODO handle error
+        });
   }
 
 }
