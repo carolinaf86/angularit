@@ -1,8 +1,13 @@
 <app-navbar (loggedOut)="onLoggedOut()"></app-navbar>
-<div class="container-fluid angularit-container">
+<div class="container-fluid angularit-container h-100">
   <div class="row h-100">
-    <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
+    <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container">
       <app-thread-list-item *ngFor="let thread of threads" [model]="thread"></app-thread-list-item>
+      <div class="btn-positioner">
+        <button id="add-thread-btn" type="button" (click)="onAdd()" class="btn btn-primary btn-circle">
+          <fa-icon icon="plus" size="4x"></fa-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>

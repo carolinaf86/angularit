@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {User, UserInterface} from '../models/User';
-import {Thread, ThreadInterface} from '../models/Thread';
-import {Comment, CommentInterface} from '../models/Comment';
+import {HttpClient} from '@angular/common/http';
+import {Comment} from '../models/Comment';
 import {catchError, map} from 'rxjs/operators';
-import {Observable, throwError} from 'rxjs';
+import {Observable} from 'rxjs';
 import {ErrorService} from './error.service';
 
 @Injectable({
@@ -33,16 +31,30 @@ export class CommentService {
       );
   }
 
-  upvote(id: number): Observable<Comment> {
+  upvote(id: string): Observable<Comment> {
     const url = this.url([this.resourceName, 'upvote'], `comment_id=${id}`);
     return this.http.get<Comment>(url)
       .pipe(map(res => res['message']),
         catchError(this.errorService.handleError));
   }
 
-  downvote(id: number): Observable<Comment> {
+  downvote(id: string): Observable<Comment> {
     const url = this.url([this.resourceName, 'downvote'], `comment_id=${id}`);
     return this.http.get<Comment>(url)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
+  create(data: Comment): Observable<Comment> {
+    const url = this.url([this.resourceName, 'create']);
+    return this.http.post<Comment>(url, data)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
+  update(data: Comment): Observable<Comment> {
+    const url = this.url([this.resourceName, 'edit']);
+    return this.http.post<Comment>(url, data)
       .pipe(map(res => res['message']),
         catchError(this.errorService.handleError));
   }

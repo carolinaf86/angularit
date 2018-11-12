@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
-import {ActivatedRoute} from '@angular/router';
-import {LoggedService} from '../shared/services/logged.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   threads: Thread[];
   isLoggedIn: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: LoggedService) { }
+  constructor(private route: ActivatedRoute, private loggedService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((data: {threads: Thread[]}) => {
@@ -25,7 +25,10 @@ export class HomeComponent implements OnInit {
 
   onLoggedOut() {
     this.isLoggedIn = false;
-    console.log('Logged out');
+  }
+
+  onAdd() {
+    this.router.navigate(['threads', 'add']);
   }
 
 }

@@ -2,17 +2,16 @@
   <div class="card-body">
     <div class="d-lg-none">
       <small><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.</small>
-
     </div>
     <small class="float-right d-none d-lg-inline">
       <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.
     </small>
-    <a class="card-title d-block" [routerLink]="'/threads/' + model.thread_id">Something Exciting!</a>
+    <a class="card-title d-block" [routerLink]="'/threads/' + model.thread_id">{{ model.thread_title }}</a>
     <fa-icon class="user-icon" icon="user-circle"></fa-icon>
     <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
 
     <app-votes class="float-right" [model]="model" type="thread"></app-votes>
 
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <p class="card-text">{{ model.thread_body }}</p>
   </div>
 </div>

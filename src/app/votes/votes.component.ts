@@ -25,11 +25,12 @@ export class VotesComponent {
   constructor(private threadService: ThreadService, private commentService: CommentService) { }
 
   upvote() {
+    // TODO create union type to stop compiler complaining
     const { model, threadService, commentService, type } = this;
     const observable = type === 'thread'
       ? threadService.upvote(model['thread_id'])
       : commentService.upvote(model['comment_id']);
-    observable.subscribe((data: Thread | Comment) => {
+    observable.subscribe((data: {}) => {
       this.model = data;
     });
   }

@@ -9,7 +9,6 @@ import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
 import {UserThreadsResolverService} from './shared/resolvers/user-threads-resolver.service';
 import {ThreadsResolverService} from './shared/resolvers/threads-resolver.service';
 import {ThreadResolverService} from './shared/resolvers/thread-resolver.service';
-import {RegisterComponent} from './register/register.component';
 
 const routes: Routes = [
   {
