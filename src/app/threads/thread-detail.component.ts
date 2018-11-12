@@ -42,6 +42,7 @@ export class ThreadDetailComponent implements OnInit {
         templateOptions: {
           label: 'Body',
           placeholder: 'Add more information...',
+          required: true,
           rows: 6
         }
       }
@@ -83,8 +84,13 @@ export class ThreadDetailComponent implements OnInit {
       ? this.threadService.update(data)
       : this.threadService.create(data);
     observable.subscribe((result: Thread) => {
+
+      if (result['form_errors']) {
+        // TODO handle error
+      }
       this.model = result;
       this.editing = false;
+
       // TODO notify success
     }, err => {
       // TODO handle error

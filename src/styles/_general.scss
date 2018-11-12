@@ -42,20 +42,34 @@ a {
 
 /* Buttons */
 #angular-it {
-  height: 100%;
   .btn-primary {
     background-color: $primary;
     border-color: $primary;
     font-weight: 700;
     &:focus {
-      box-shadow: 0 0 0 2px $highlight;
+      box-shadow: 0 0 0 2px $primary;
     }
   }
   .btn-secondary {
     background-color: $secondary;
+    border-color: $secondary;
+  }
+  .btn-highlight {
+    background-color: $highlight;
+    border-color: $highlight;
+    color: $primary;
+    &:focus {
+      box-shadow: none;
+    }
+  }
+  .btn-circle {
+    border-radius: 50%;
+    // TODO add box shadow
+    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 }
 
+/* Voting */
 div.votes-container {
   font-size: 1.1rem;
 }
