@@ -10,7 +10,8 @@
       <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
       <p><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> Posted {{ model.timestamp | timeDifference }} ago.</p>
       <p class="thread-body">{{ model.thread_body }}</p>
-      <button *ngIf="showActions" type="button" class="btn btn-primary" (click)="onEdit()">Edit</button>
+      <button *ngIf="showActions" type="button" class="btn btn-primary mr-2" (click)="onEdit()">Edit</button>
+      <button *ngIf="showActions" type="button" class="btn btn-secondary" (click)="onDelete()">Delete</button>
 
       <!-- mobile only -->
       <app-votes class="d-lg-none" [model]="model"></app-votes>

@@ -86,8 +86,27 @@ export class ThreadDetailComponent implements OnInit {
       : this.editing = false;
   }
 
+  onDelete() {
+    console.log('Deleting');
+    if (this.isNew) {
+      console.log('Cannot delete a new thread');
+    }
+    // Check user has right to perform action
+    if (this.loggedService.getLoggedUserId() !== this.model.user_id) {
+      // TODO throw error and return
+    }
+    this.threadService.delete(this.model.thread_id)
+      .subscribe(result => {
+        // TODO notify success
+        this.router.navigate(['/']);
+      });
+  }
+
   submit(data: Thread) {
-    // TODO double check user is allowed to edit
+    // Check user has right to perform action
+    if (!this.isNew && this.loggedService.getLoggedUserId() !== this.model.user_id) {
+      // TODO handle error and return
+    }
 
     const observable = data.thread_id
       ? this.threadService.update(data)

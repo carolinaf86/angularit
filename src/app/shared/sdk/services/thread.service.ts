@@ -6,6 +6,7 @@ import {CommentInterface} from '../models/Comment';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, throwError} from 'rxjs';
 import {ErrorService} from './error.service';
+import {NotificationInterface} from '../models/Notification';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,14 @@ export class ThreadService {
 
   update(data: Thread): Observable<Thread> {
     const url = this.url([this.resourceName, 'update']);
+    return this.http.post<Thread>(url, data)
+      .pipe(map(res => res['message']),
+        catchError(this.errorService.handleError));
+  }
+
+  delete(id: string): Observable<NotificationInterface> {
+    const url = this.url([this.resourceName, 'remove']);
+    const data = {thread_id: id};
     return this.http.post<Thread>(url, data)
       .pipe(map(res => res['message']),
         catchError(this.errorService.handleError));
