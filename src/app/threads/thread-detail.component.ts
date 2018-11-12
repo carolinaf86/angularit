@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute} from '@angular/router';
 import {LoggedService} from '../shared/services/logged.service';
-import {Credentials} from '../shared/sdk/models/Auth';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {ThreadService} from '../shared/sdk/services/thread.service';
-import {Comment, Comment} from '../shared/sdk/models/Comment';
+import {Comment} from '../shared/sdk/models/Comment';
 
 @Component({
   selector: 'app-thread-detail',

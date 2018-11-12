@@ -1,16 +1,17 @@
 <div class="card">
-  <div *ngIf="model.comment_id;else editable" class="card-body">
+  <div *ngIf="!editing;else editable" class="card-body">
     <app-votes class="float-right" [model]="model" type="comment"></app-votes>
     <fa-icon class="user-icon" icon="user-circle"></fa-icon>
     <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
     <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
     <p class="card-text">{{ model.comment_body }}</p>
+    <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-default mr-2">Edit</button>
   </div>
   <ng-template #editable>
     <div class="card-body">
-      <form [formGroup]="form" (ngSubmit)="submit(model)">
-        <formly-form [form]="form" [fields]="fields" [model]="model">
-          <button type="button" (click)="onCancel()" class="btn btn-default mr-2">Cancel</button>
+      <form [formGroup]="form" (ngSubmit)="submit(data)">
+        <formly-form [form]="form" [fields]="fields" [model]="data">
+          <button *ngIf="!isNew" type="button" (click)="onCancel()" class="btn btn-default mr-2">Cancel</button>
           <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
         </formly-form>
       </form>
