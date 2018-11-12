@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
@@ -15,7 +15,9 @@ import {Comment} from '../shared/sdk/models/Comment';
 export class ThreadDetailComponent implements OnInit {
 
   model: Thread;
+  data: Thread;
   addComment: Comment;
+  isNew: boolean;
 
   form = new FormGroup({});
   fields: FormlyFieldConfig[];
@@ -24,7 +26,8 @@ export class ThreadDetailComponent implements OnInit {
   editing: boolean;
   showActions: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: AuthService, private threadService: ThreadService) {
+  constructor(private route: ActivatedRoute, private loggedService: AuthService, private threadService: ThreadService,
+              private router: Router) {
     this.fields = [
       {
         key: 'thread_title',
@@ -52,10 +55,15 @@ export class ThreadDetailComponent implements OnInit {
   ngOnInit(): void {
 
     // Set editing to true if id is 'add';
-    this.editing = this.route.snapshot.paramMap.get('id') === 'add';
+    this.editing = this.isNew = this.route.snapshot.paramMap.get('id') === 'add';
 
     this.route.data.subscribe((data: { thread: Thread }) => {
       this.model = data.thread;
+
+      // Clone model for editing
+      this.data = {...this.model};
+
+      // Create an empty comment
       this.addComment = new Comment({thread_id: data.thread.thread_id});
       this.showActions = this.model.user_id === this.loggedService.getLoggedUserId();
     });
@@ -73,8 +81,9 @@ export class ThreadDetailComponent implements OnInit {
   }
 
   onCancel() {
-    // TODO reset model!
-    this.editing = false;
+    this.isNew
+      ? this.router.navigate(['/'])
+      : this.editing = false;
   }
 
   submit(data: Thread) {

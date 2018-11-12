@@ -17,8 +17,8 @@
     </div>
     <ng-template #editThread>
       <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 thread-detail">
-        <form [formGroup]="form" (ngSubmit)="submit(model)">
-          <formly-form [form]="form" [fields]="fields" [model]="model">
+        <form [formGroup]="form" (ngSubmit)="submit(data)">
+          <formly-form [form]="form" [fields]="fields" [model]="data">
             <button type="button" (click)="onCancel()" class="btn btn-default mr-2">Cancel</button>
             <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
           </formly-form>
