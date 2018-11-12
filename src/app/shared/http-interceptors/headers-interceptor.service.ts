@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {AuthService} from '../services/auth.service';
 import {Observable} from 'rxjs';
-import {LoggedService} from '../services/logged.service';
 
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
 
-  constructor(private loggedService: LoggedService) { }
+  constructor(private loggedService: AuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
@@ -25,7 +25,6 @@ export class HeadersInterceptor implements HttpInterceptor {
         }
       });
     }
-    // TODO add auth token from local storage
     return next.handle(req);
   }
 }

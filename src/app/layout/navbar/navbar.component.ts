@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {LoggedService} from '../../shared/services/logged.service';
+import {AuthService} from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -34,7 +34,7 @@ export class NavbarComponent implements OnInit {
   @Output() loggedOut: EventEmitter<boolean> = new EventEmitter<boolean>();
   isCollapsed = false;
   loggedUserId: string;
-  constructor(private loggedService: LoggedService) { }
+  constructor(private loggedService: AuthService) { }
 
   ngOnInit(): void {
     this.loggedUserId = this.loggedService.getLoggedUserId();

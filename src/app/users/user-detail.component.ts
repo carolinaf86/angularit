@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../shared/sdk/models/User';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute} from '@angular/router';
-import {LoggedService} from '../shared/services/logged.service';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,7 +15,7 @@ export class UserDetailComponent implements OnInit {
   threads: Thread[];
   isLoggedIn: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: LoggedService) {
+  constructor(private route: ActivatedRoute, private loggedService: AuthService) {
   }
 
   ngOnInit() {

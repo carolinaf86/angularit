@@ -3,7 +3,7 @@ import {FormlyFieldConfig} from '@ngx-formly/core';
 import {FormGroup, Validators} from '@angular/forms';
 import {UserService} from '../shared/sdk/services/user.service';
 import {AuthToken, Credentials} from '../shared/sdk/models/Auth';
-import {LoggedService} from '../shared/services/logged.service';
+import {AuthService} from '../shared/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
@@ -39,7 +39,7 @@ export class LoginComponent {
   ];
   private returnUrl: string;
 
-  constructor(private userService: UserService, private loggedService: LoggedService, private route: ActivatedRoute,
+  constructor(private userService: UserService, private loggedService: AuthService, private route: ActivatedRoute,
               private router: Router) {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';

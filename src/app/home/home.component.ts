@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute} from '@angular/router';
-import {LoggedService} from '../shared/services/logged.service';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   threads: Thread[];
   isLoggedIn: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: LoggedService) { }
+  constructor(private route: ActivatedRoute, private loggedService: AuthService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((data: {threads: Thread[]}) => {

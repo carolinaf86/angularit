@@ -3,7 +3,7 @@ import {Comment} from '../shared/sdk/models/Comment';
 import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {CommentService} from '../shared/sdk/services/comment.service';
-import {LoggedService} from '../shared/services/logged.service';
+import {AuthService} from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-comment',
@@ -22,7 +22,7 @@ export class CommentComponent implements OnInit {
   isNew: boolean;
   showEdit: boolean;
 
-  constructor(private commentService: CommentService, private loggedService: LoggedService) {
+  constructor(private commentService: CommentService, private loggedService: AuthService) {
     this.fields = [
       {
         key: 'comment_body',
