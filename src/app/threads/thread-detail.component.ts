@@ -87,7 +87,8 @@ export class ThreadDetailComponent implements OnInit {
   }
 
   onDelete() {
-    console.log('Deleting');
+    // TODO confirm delete
+
     if (this.isNew) {
       console.log('Cannot delete a new thread');
     }
@@ -118,6 +119,10 @@ export class ThreadDetailComponent implements OnInit {
       }
       this.model = result;
       this.editing = false;
+
+      if (this.isNew) {
+        this.router.navigate(['threads', result.thread_id]);
+      }
 
       // TODO notify success
     }, err => {
