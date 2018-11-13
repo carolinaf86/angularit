@@ -128,13 +128,13 @@ export class ThreadDetailComponent implements OnInit {
       this.model = result;
       this.editing = false;
 
-      this.notificationService.notifySuccess('Thread created successfully!');
+      this.notificationService.notifySuccess('Thread saved successfully!');
 
       if (this.isNew) {
         this.router.navigate(['threads', result.thread_id]);
       }
       }, err => {
-        this.notificationService.notifyError(err, 'Failed to update thread. Please try again later.');
+        this.notificationService.notifyError(err, 'Failed to save thread. Please try again later.');
     });
   }
 }
