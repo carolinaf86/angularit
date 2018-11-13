@@ -5,6 +5,7 @@ import {UserService} from '../shared/sdk/services/user.service';
 import {AuthToken, Credentials} from '../shared/sdk/models/Auth';
 import {AuthService} from '../shared/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NotificationService} from '../shared/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -40,8 +41,8 @@ export class LoginComponent {
   private returnUrl: string;
 
   constructor(private userService: UserService, private loggedService: AuthService, private route: ActivatedRoute,
-              private router: Router) {
-    // get return url from route parameters or default to '/'
+              private router: Router, private notificationService: NotificationService) {
+    // TODO get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -50,15 +51,15 @@ export class LoginComponent {
       .subscribe((result: AuthToken) => {
         // Check if user has been found
         if (!result.auth_token) {
-          // TODO deal with error
+          this.notificationService.notifyError(null, `Oops! We didn't find a user with that email and password.`);
         } else {
-          // TODO notify
+          this.notificationService.notifySuccess('Logged in successfully.');
           this.loggedService.setLoggedUser(result);
           this.router.navigateByUrl(this.returnUrl);
         }
       },
         err => {
-          // TODO handle error
+          this.notificationService.notifyError(err, 'Failed to log in. Please try again later.');
         });
   }
 

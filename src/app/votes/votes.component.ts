@@ -3,6 +3,7 @@ import {Thread} from '../shared/sdk/models/Thread';
 import {Comment} from '../shared/sdk/models/Comment';
 import {ThreadService} from '../shared/sdk/services/thread.service';
 import {CommentService} from '../shared/sdk/services/comment.service';
+import {NotificationService} from '../shared/services/notification.service';
 
 type CommentOrThread = Comment | Thread;
 
@@ -24,7 +25,8 @@ export class VotesComponent {
   @Input() model: Thread | Comment;
   @Input() type: 'thread' | 'comment';
 
-  constructor(private threadService: ThreadService, private commentService: CommentService) { }
+  constructor(private threadService: ThreadService, private commentService: CommentService,
+              private notificationService: NotificationService) { }
 
   upvote() {
     // TODO create union type to stop compiler complaining
@@ -34,14 +36,14 @@ export class VotesComponent {
         .subscribe((data: Thread) => {
           this.model = data;
         }, err => {
-          // TODO handle error
+          this.handleError(err);
         });
     } else {
       commentService.upvote(model['comment_id'])
         .subscribe((data: Comment) => {
           this.model = data;
         }, err => {
-          // TODO handle error
+          this.handleError(err);
         });
     }
   }
@@ -54,16 +56,20 @@ export class VotesComponent {
         .subscribe((data: Thread) => {
           this.model = data;
       }, err => {
-          // TODO handle error
+          this.handleError(err);
         });
     } else {
       commentService.downvote(model['comment_id'])
         .subscribe((data: Comment) => {
           this.model = data;
         }, err => {
-          // TODO handle error
+          this.handleError(err);
         });
     }
+  }
+
+  private handleError(err) {
+    this.notificationService.notifyError(err, 'Failed to save your vote! Please try again later.');
   }
 
 }

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
+import {NotificationService} from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -40,7 +41,7 @@ export class NavbarComponent implements OnInit {
   @Output() loggedOut: EventEmitter<boolean> = new EventEmitter<boolean>();
   isCollapsed = false;
   loggedUserId: string;
-  constructor(private loggedService: AuthService, private router: Router) { }
+  constructor(private loggedService: AuthService, private router: Router, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.loggedUserId = this.loggedService.getLoggedUserId();
@@ -49,6 +50,7 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.loggedService.clearLoggedUser();
     this.loggedUserId = null;
+    this.notificationService.notifySuccess(`You've been logged out.`);
     this.loggedOut.emit(true);
   }
 
