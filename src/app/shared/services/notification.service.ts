@@ -30,8 +30,8 @@ export class NotificationService {
     this.notifier.notify( 'success',  message || 'Success!' );
   }
 
-  public notifyError(err: Error, message?: string) {
-    console.error(err);
+  public notifyError(err?: Error, message?: string) {
+    if (err) { console.error(err); }
     this.notifier.notify( 'error', message || 'An unexpected error has occurred.' );
   }
 

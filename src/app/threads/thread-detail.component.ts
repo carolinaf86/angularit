@@ -6,6 +6,7 @@ import {FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {ThreadService} from '../shared/sdk/services/thread.service';
 import {Comment} from '../shared/sdk/models/Comment';
+import {NotificationService} from '../shared/services/notification.service';
 
 @Component({
   selector: 'app-thread-detail',
@@ -27,7 +28,7 @@ export class ThreadDetailComponent implements OnInit {
   showActions: boolean;
 
   constructor(private route: ActivatedRoute, private loggedService: AuthService, private threadService: ThreadService,
-              private router: Router) {
+              private router: Router, private notificationService: NotificationService) {
     this.fields = [
       {
         key: 'thread_title',
@@ -66,6 +67,8 @@ export class ThreadDetailComponent implements OnInit {
       // Create an empty comment
       this.addComment = new Comment({thread_id: data.thread.thread_id});
       this.showActions = this.model.user_id === this.loggedService.getLoggedUserId();
+    }, err => {
+      this.notificationService.notifyError(err, `Oops! We're having problems loading this thread right now.`)
     });
 
     this.isLoggedIn = this.loggedService.isLoggedIn();
@@ -90,23 +93,28 @@ export class ThreadDetailComponent implements OnInit {
     // TODO confirm delete
 
     if (this.isNew) {
-      console.log('Cannot delete a new thread');
+      // Navigate to home
+      return this.router.navigateByUrl('/');
     }
     // Check user has right to perform action
     if (this.loggedService.getLoggedUserId() !== this.model.user_id) {
-      // TODO throw error and return
+      this.notificationService.notifyError(null, 'You cannot delete a thread posted by another user!');
+      return this.router.navigateByUrl('/');
     }
     this.threadService.delete(this.model.thread_id)
       .subscribe(result => {
-        // TODO notify success
+        this.notificationService.notifySuccess('Thread successfully deleted!');
         this.router.navigate(['/']);
+      }, err => {
+        this.notificationService.notifyError(err, 'Failed to delete thread. Please try again later.');
       });
   }
 
   submit(data: Thread) {
     // Check user has right to perform action
     if (!this.isNew && this.loggedService.getLoggedUserId() !== this.model.user_id) {
-      // TODO handle error and return
+      this.notificationService.notifyError(null, 'You cannot update a thread posted by another user!');
+      return this.router.navigateByUrl('/');
     }
 
     const observable = data.thread_id
@@ -115,18 +123,18 @@ export class ThreadDetailComponent implements OnInit {
     observable.subscribe((result: Thread) => {
 
       if (result['form_errors']) {
-        // TODO
+        this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
       }
       this.model = result;
       this.editing = false;
 
+      this.notificationService.notifySuccess('Thread created successfully!');
+
       if (this.isNew) {
         this.router.navigate(['threads', result.thread_id]);
       }
-
-      // TODO notify success
-    }, err => {
-      // TODO handle error
+      }, err => {
+        this.notificationService.notifyError(err, 'Failed to update thread. Please try again later.');
     });
   }
 }
