@@ -125,6 +125,7 @@ export class ThreadDetailComponent implements OnInit {
       if (result['form_errors']) {
         this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
       }
+
       this.model = result;
       this.editing = false;
 

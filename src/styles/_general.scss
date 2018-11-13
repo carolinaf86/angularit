@@ -24,19 +24,22 @@ a {
       text-decoration: underline $highlight;
     }
   }
+  &.nav-link {
+    cursor: pointer !important;
+  }
 }
 
 /* Layout */
 .angularit-container {
   min-height: 100%;
-  .cards-container {
-    background-color: $background-grey;
-    // TODO make container scroll-able
-    // overflow-y: auto;
-  }
+  background-color: $background-grey;
+  padding-bottom: 20px;
   .card {
     margin-top: 12px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .top-card {
+    // TODO add different styling?
   }
 }
 

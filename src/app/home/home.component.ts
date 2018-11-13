@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
 
   threads: Thread[];
   isLoggedIn: boolean;
-  error: string;
 
   constructor(private route: ActivatedRoute, private loggedService: AuthService, private router: Router,
               private notificationService: NotificationService) { }
