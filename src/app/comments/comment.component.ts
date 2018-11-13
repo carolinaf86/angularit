@@ -22,6 +22,7 @@ export class CommentComponent implements OnInit {
   fields: FormlyFieldConfig[];
   isNew: boolean;
   showEdit: boolean;
+  loggedUserId: string;
 
   constructor(private commentService: CommentService, private loggedService: AuthService, private notificationService: NotificationService) {
     this.fields = [
@@ -44,7 +45,8 @@ export class CommentComponent implements OnInit {
     this.data = {...this.model};
 
     // Only allow edit on comments for logged user
-    this.showEdit = this.model.user_id === this.loggedService.getLoggedUserId();
+    this.loggedUserId = this.loggedService.getLoggedUserId();
+    this.showEdit = this.model.user_id === this.loggedUserId;
   }
 
   onEdit() {
@@ -52,6 +54,14 @@ export class CommentComponent implements OnInit {
   }
 
   submit(data: Comment) {
+
+    // Check user has rights to create/update
+    if ((this.isNew && !this.loggedUserId) || (this.loggedUserId !== this.model.user_id)) {
+      this.editing = false;
+      this.showEdit = false;
+      const message = this.isNew ? 'You must be logged in to comment.' : `You cannot update another user's comment!`;
+      return this.notificationService.notifyError(null, message);
+    }
 
     const updateOrCreate = this.isNew ? this.commentService.create(data) : this.commentService.update(data);
 
