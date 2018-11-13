@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
+import {NotificationService} from '../shared/services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,19 @@ export class HomeComponent implements OnInit {
 
   threads: Thread[];
   isLoggedIn: boolean;
+  error: string;
 
-  constructor(private route: ActivatedRoute, private loggedService: AuthService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private loggedService: AuthService, private router: Router,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((data: {threads: Thread[]}) => {
       this.threads = data.threads;
+    }, err => {
+      this.notificationService.notifyError(err, `Oops! We're having problems loading new posts right now.`);
+      this.threads = [];
     });
     this.isLoggedIn = this.loggedService.isLoggedIn();
-    console.log('Logged in', this.isLoggedIn);
   }
 
   onLoggedOut() {
