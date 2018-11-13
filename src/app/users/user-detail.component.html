@@ -1,5 +1,5 @@
 <app-navbar (loggedOut)="onLoggedOut()"></app-navbar>
-<div class="container-fluid angularit-container h-100">
+<div class="container-fluid angularit-container">
   <div class="row h-100">
     <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
       <div class="card">
@@ -16,8 +16,8 @@
             <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.post_downvotes }}
           </p>
           <p>Their comments have received:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.post_upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.post_downvotes }}
+            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.comment_upvotes }}
+            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.comment_downvotes }}
           </p>
         </div>
       </div>
