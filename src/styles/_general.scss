@@ -21,7 +21,7 @@ a {
     color: $text-highlight;
     &:hover {
       color: $text-highlight;
-      text-decoration: underline $highlight;
+      text-decoration: underline $text-grey;
     }
   }
   &.nav-link {
@@ -61,6 +61,7 @@ a {
     background-color: $highlight;
     border-color: $highlight;
     color: $primary;
+    font-weight: 600;
     &:focus {
       box-shadow: none;
     }

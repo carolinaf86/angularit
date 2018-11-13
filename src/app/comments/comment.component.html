@@ -5,7 +5,7 @@
     <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
     <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
     <p class="card-text">{{ model.comment_body }}</p>
-    <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-default mr-2">Edit</button>
+    <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-secondary mr-2">Edit</button>
   </div>
   <ng-template #editable>
     <div class="card-body">
