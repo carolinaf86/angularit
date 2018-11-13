@@ -8,8 +8,8 @@ export class TimeDifferencePipe implements PipeTransform {
     const difference = moment.duration(moment().diff(postedMoment));
     const days = difference.asDays();
     if (days < 1) {
-      return `${Math.round(difference.asHours())} hours`;
+      return `${Math.round(difference.asHours())} hour(s)`;
     }
-    return `${Math.round(days)} days`;
+    return `${Math.round(days)} day(s)`;
   }
 }

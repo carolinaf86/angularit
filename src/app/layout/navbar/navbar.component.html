@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <a class="navbar-brand" routerLink="/">Angular<span>-it</span></a>
+  <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" aria-controls="navbarNav" aria-expanded="false"
+          aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngbCollapse]="isCollapsed" class="navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-lg-auto">
+      <li>
+        <button class="d-none d-lg-inline btn btn-highlight mr-2" type="button" (click)="onAdd()">
+          Create post
+        </button>
+      </li>
+      <li class="nav-item">
+        <a *ngIf="!loggedUserId;else logoutLink" class="nav-link" routerLink="/login">Log in</a>
+        <ng-template #logoutLink>
+          <a class="nav-link" #logoutLink (click)="logout()">Logout</a>
+        </ng-template>
+      </li>
+      <li *ngIf="!loggedUserId" class="nav-item">
+        <a class="nav-link" routerLink="/register">Register</a>
+      </li>
+      <li *ngIf="loggedUserId" class="nav-item">
+        <a class="nav-link" [routerLink]="'/users/' + loggedUserId">Profile</a>
+      </li>
+    </ul>
+  </div>
+</nav>

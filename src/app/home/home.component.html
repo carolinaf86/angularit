@@ -1,20 +1,14 @@
 <app-navbar (loggedOut)="onLoggedOut()"></app-navbar>
-<div class="container-fluid angularit-container h-100">
+<div class="container-fluid angularit-container">
   <div class="row h-100">
     <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container">
 
-      <div *ngIf="error" class="card">
-        <div class="card-body">
-          <h5 class="card-title" [innerHtml]="error"></h5>
-        </div>
-      </div>
-
       <app-thread-list-item *ngFor="let thread of threads" [model]="thread"></app-thread-list-item>
-      <div class="btn-positioner">
-        <button id="add-thread-btn" type="button" (click)="onAdd()" class="btn btn-primary btn-circle">
-          <fa-icon icon="plus" size="4x"></fa-icon>
-        </button>
-      </div>
+      <!--<div class="btn-positioner" *ngIf="isLoggedIn">-->
+        <!--<button id="add-thread-btn" type="button" (click)="onAdd()" class="btn btn-primary btn-circle">-->
+          <!--<fa-icon icon="plus" size="4x"></fa-icon>-->
+        <!--</button>-->
+      <!--</div>-->
     </div>
   </div>
 </div>
