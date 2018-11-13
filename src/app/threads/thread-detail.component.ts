@@ -115,7 +115,7 @@ export class ThreadDetailComponent implements OnInit {
     observable.subscribe((result: Thread) => {
 
       if (result['form_errors']) {
-        // TODO handle error
+        // TODO
       }
       this.model = result;
       this.editing = false;

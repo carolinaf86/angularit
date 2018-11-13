@@ -4,6 +4,8 @@ import {Comment} from '../shared/sdk/models/Comment';
 import {ThreadService} from '../shared/sdk/services/thread.service';
 import {CommentService} from '../shared/sdk/services/comment.service';
 
+type CommentOrThread = Comment | Thread;
+
 @Component({
   selector: 'app-votes',
   template: `
@@ -27,22 +29,41 @@ export class VotesComponent {
   upvote() {
     // TODO create union type to stop compiler complaining
     const { model, threadService, commentService, type } = this;
-    const observable = type === 'thread'
-      ? threadService.upvote(model['thread_id'])
-      : commentService.upvote(model['comment_id']);
-    observable.subscribe((data: {}) => {
-      this.model = data;
-    });
+    if (type === 'thread') {
+      threadService.upvote(model.thread_id)
+        .subscribe((data: Thread) => {
+          this.model = data;
+        }, err => {
+          // TODO handle error
+        });
+    } else {
+      commentService.upvote(model['comment_id'])
+        .subscribe((data: Comment) => {
+          this.model = data;
+        }, err => {
+          // TODO handle error
+        });
+    }
   }
 
   downvote() {
     const { model, threadService, commentService, type } = this;
-    const observable = type === 'thread'
-      ? threadService.downvote(model['thread_id'])
-      : commentService.downvote(model['comment_id']);
-    observable.subscribe((data: Thread | Comment) => {
-      this.model = data;
-    });
+
+    if (type === 'thread') {
+      threadService.downvote(model.thread_id)
+        .subscribe((data: Thread) => {
+          this.model = data;
+      }, err => {
+          // TODO handle error
+        });
+    } else {
+      commentService.downvote(model['comment_id'])
+        .subscribe((data: Comment) => {
+          this.model = data;
+        }, err => {
+          // TODO handle error
+        });
+    }
   }
 
 }

@@ -3,6 +3,8 @@ import {IconsModule} from './icons.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FormlyBootstrapModule} from '@ngx-formly/bootstrap';
 import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
+import {NotifierModule} from 'angular-notifier';
+import {NOTIFIER_CONFIG} from '../services/notification.service';
 
 @NgModule({
   declarations: [],
@@ -11,14 +13,16 @@ import {NgbCollapseModule} from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     ReactiveFormsModule,
     FormlyBootstrapModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    NotifierModule.withConfig(NOTIFIER_CONFIG)
   ],
   exports: [
     IconsModule,
     FormsModule,
     ReactiveFormsModule,
     FormlyBootstrapModule,
-    NgbCollapseModule
+    NgbCollapseModule,
+    NotifierModule
   ]
 })
 export class RequirementsModule { }

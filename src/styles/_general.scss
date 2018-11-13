@@ -100,3 +100,13 @@ fa-icon {
     color: $primary;
   }
 }
+
+// Notifications
+notifier-notification {
+  p {
+    color: $white !important;
+  }
+  &.notifier__notification--success {
+    background-color: $secondary;
+  }
+}
