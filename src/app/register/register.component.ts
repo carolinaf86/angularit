@@ -48,6 +48,7 @@ export class RegisterComponent {
       validators: {
         min: {
           expression: (control: FormControl): boolean => {
+            if (!control.value) { return true; }
             return control.value.length >= 8;
           },
           message: 'Password must be at least 8 characters.'

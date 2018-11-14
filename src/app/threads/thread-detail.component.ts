@@ -42,6 +42,7 @@ export class ThreadDetailComponent implements OnInit {
         validators: {
           max: {
             expression: (control: FormControl): boolean => {
+              if (!control.value) { return true; }
               return control.value.length < 255;
             },
             message: 'Title cannot be longer than 255 characters.'
@@ -60,6 +61,7 @@ export class ThreadDetailComponent implements OnInit {
         validators: {
           max: {
             expression: (control: FormControl): boolean => {
+              if (!control.value) { return true; }
               return control.value.length < 64000;
             },
             message: 'Body cannot be longer than 64,000 characters.'
