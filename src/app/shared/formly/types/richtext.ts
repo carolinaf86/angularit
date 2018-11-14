@@ -4,7 +4,8 @@ import {FieldType} from '@ngx-formly/core';
 @Component({
   selector: 'app-formly-rich-text',
   template: `
-    <quill-editor [maxLength]="to.richtext.maxLength"
+    <quill-editor [id]="field.id"
+                  [maxLength]="to.richtext.maxLength"
                   [minLength]="0"
                   [modules]="to.richtext.modules"
                   [readOnly]="to.disabled"
@@ -15,8 +16,9 @@ import {FieldType} from '@ngx-formly/core';
 })
 export class FormlyRichTextComponent extends FieldType {
 
-  get type() {
-    return 'richtext';
+  ngOnInit(): void {
+    this.to.modules = this.to.modules || {};
+    super.ngOnInit();
   }
 
 }
