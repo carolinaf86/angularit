@@ -53,8 +53,11 @@
         </div>
       </ng-template>
 
-      <app-comment *ngIf="isLoggedIn && !editing" [model]="addComment"></app-comment>
-      <app-comment *ngFor="let comment of model.comments" [model]="comment"></app-comment>
+      <ng-container *ngIf="isLoggedIn && !editing">
+        <app-comment [model]="addComment"></app-comment>
+        <app-comment *ngFor="let comment of model.comments" [model]="comment"></app-comment>
+      </ng-container>
+
     </div>
   </div>
 </div>
