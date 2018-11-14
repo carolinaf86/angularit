@@ -40,54 +40,20 @@
         </div>
       </div>
 
-
-
-    </div>
-
-    <div class="col-xl-3 offset-xl-3 col-lg-4 offset-lg-2 col-md-6">
-
-
-      <div class="card d-none d-md-block">
-        <div class="card-body">
-          <h5>
-            <fa-icon class="trophy-icon" icon="trophy"></fa-icon> {{ comments[0].comment_body }}
-          </h5>
-          <hr>
-
-          <app-votes class="float-right" [model]="comments[0]" type="comment"></app-votes>
-          <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ comments[0].timestamp | timeDifference }} ago</small>
-        </div>
-      </div>
-
-      <ng-container *ngFor="let comment of comments; let i = index">
-        <app-comment class="d-none d-md-inline" *ngIf="i > 0 && i < 6" [model]="comment" [noEdit]="true"></app-comment>
-      </ng-container>
+      <ngb-tabset type="pills">
+        <ngb-tab title="Threads">
+          <ng-template ngbTabContent>
+              <app-thread-list-item *ngFor="let thread of threads;" [model]="thread"></app-thread-list-item>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Comments">
+          <ng-template ngbTabContent>
+            <app-comment *ngFor="let comment of comments;" [model]="comment" [noEdit]="true"></app-comment>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
 
     </div>
 
-    <div class="col-xl-3 col-lg-4 col-md-6">
-      <div class="card top-card">
-        <div class="card-body">
-          <a class="card-title d-block" [routerLink]="'/threads/' + threads[0].thread_id">
-            <fa-icon class="trophy-icon" icon="trophy"></fa-icon> {{ threads[0].thread_title }}
-          </a>
-          <small>
-            <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
-            Posted {{ threads[0].timestamp | timeDifference }} ago.
-          </small>
-          <ng-container *ngIf="threads[0].user_name">
-            <fa-icon class="user-icon" icon="user-circle"></fa-icon>
-            <a [routerLink]="'/users/' + threads[0].user_id" class="user-link">{{ threads[0].user_name }}</a>
-          </ng-container>
-
-          <app-votes class="float-right" [model]="threads[0]" type="thread"></app-votes>
-
-          <p class="card-text">{{ threads[0].thread_body }}</p>
-        </div>
-      </div>
-      <ng-container *ngFor="let thread of threads; let i = index">
-        <app-thread-list-item *ngIf="i > 0 && i < 6" [model]="thread"></app-thread-list-item>
-      </ng-container>
-    </div>
   </div>
 </div>

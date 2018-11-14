@@ -124,3 +124,15 @@ notifier-notification {
     background-color: $secondary;
   }
 }
+
+ngb-tabset {
+  ul li a {
+    color: $text-grey;
+    &:hover {
+      color: $text-highlight;
+    }
+    &.active {
+      background-color: $primary !important;
+    }
+  }
+}
