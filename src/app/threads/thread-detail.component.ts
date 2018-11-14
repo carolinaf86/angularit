@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {ThreadService} from '../shared/sdk/services/thread.service';
 import {Comment} from '../shared/sdk/models/Comment';
@@ -38,6 +38,15 @@ export class ThreadDetailComponent implements OnInit {
           placeholder: 'Add title',
           required: true,
           rows: 3
+        },
+        validators: {
+          max: {
+            expression: (control: FormControl): boolean => {
+              if (!control.value) { return true; }
+              return control.value.length < 255;
+            },
+            message: 'Title cannot be longer than 255 characters.'
+          }
         }
       },
       {
@@ -48,6 +57,15 @@ export class ThreadDetailComponent implements OnInit {
           placeholder: 'Add more information...',
           required: true,
           rows: 6
+        },
+        validators: {
+          max: {
+            expression: (control: FormControl): boolean => {
+              if (!control.value) { return true; }
+              return control.value.length < 64000;
+            },
+            message: 'Body cannot be longer than 64,000 characters.'
+          }
         }
       }
     ];
@@ -124,7 +142,7 @@ export class ThreadDetailComponent implements OnInit {
     observable.subscribe((result: Thread) => {
 
       if (result['form_errors']) {
-        this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
+        return this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
       }
 
       this.model = result;

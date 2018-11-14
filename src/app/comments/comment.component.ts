@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Comment} from '../shared/sdk/models/Comment';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {CommentService} from '../shared/sdk/services/comment.service';
 import {AuthService} from '../shared/services/auth.service';
@@ -34,6 +34,15 @@ export class CommentComponent implements OnInit {
           placeholder: 'Add a comment...',
           required: true,
           rows: 6
+        },
+        validators: {
+          max: {
+            expression: (control: FormControl): boolean => {
+              if (!control.value) { return true; }
+              return control.value.length < 8000;
+            },
+            message: 'Comments cannot be longer than 8,000 characters.'
+          }
         }
       }
     ];

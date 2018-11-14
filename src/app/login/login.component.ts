@@ -6,6 +6,7 @@ import {AuthToken, Credentials} from '../shared/sdk/models/Auth';
 import {AuthService} from '../shared/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../shared/services/notification.service';
+import {ValidationMessageOption} from '@ngx-formly/core/lib/services/formly.config';
 
 @Component({
   selector: 'app-login',
