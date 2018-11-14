@@ -1,6 +1,5 @@
 <div class="card">
-  <div *ngIf="!editing; else editable" class="card-body">
-
+  <div *ngIf="!editing;else editable" class="card-body">
     <app-votes class="float-right" [model]="model" type="comment"></app-votes>
 
     <ul class="list-inline" *ngIf="model.user_id && model.user_name">
