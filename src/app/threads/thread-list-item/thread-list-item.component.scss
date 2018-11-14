@@ -1,12 +1,15 @@
 .card {
   margin-top: 28px;
   .card-body {
-    h5 {
-      margin-bottom: 0.25rem;
-    }
     a {
       font-size: 80%;
       margin-bottom: 0.5rem;
+    }
+    p.card-text {
+      max-height: 80px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
