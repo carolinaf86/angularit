@@ -24,7 +24,8 @@ export class CommentComponent implements OnInit {
   showEdit: boolean;
   loggedUserId: string;
 
-  constructor(private commentService: CommentService, private loggedService: AuthService, private notificationService: NotificationService) {
+  constructor(private commentService: CommentService, private loggedService: AuthService,
+              private notificationService: NotificationService) {
     this.fields = [
       {
         key: 'comment_body',
@@ -53,7 +54,8 @@ export class CommentComponent implements OnInit {
     this.editing = true;
   }
   onCancel() {
-    // TODO add method
+    this.data = {...this.model};
+    this.editing = false;
   }
 
   submit(data: Comment) {
@@ -78,6 +80,7 @@ export class CommentComponent implements OnInit {
         this.notificationService.notifySuccess('Comment saved successfully!');
         this.model = result;
         this.showEdit = true;
+        this.isNew = false;
     }, err => {
       this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
     });
