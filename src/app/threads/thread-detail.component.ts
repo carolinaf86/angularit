@@ -57,6 +57,8 @@ export class ThreadDetailComponent implements OnInit {
           placeholder: 'Add more information...',
           required: true,
           richtext: {
+            min: 1,
+            max: 64000,
             modules: {
               toolbar: [
                 ['bold', 'italic', 'underline', 'strike'],

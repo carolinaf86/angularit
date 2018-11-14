@@ -35,6 +35,8 @@ export class CommentComponent implements OnInit {
           placeholder: 'Add a comment...',
           required: true,
           richtext: {
+            min: 1,
+            max: 8000,
             modules: {
               toolbar: [
                 ['bold', 'italic', 'underline', 'strike'],

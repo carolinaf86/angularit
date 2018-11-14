@@ -5,8 +5,8 @@ import {FieldType} from '@ngx-formly/core';
   selector: 'app-formly-rich-text',
   template: `
     <quill-editor [id]="field.id"
-                  [maxLength]="to.richtext.maxLength"
-                  [minLength]="0"
+                  [maxLength]="to.richtext.max"
+                  [minLength]="to.richtext.min"
                   [modules]="to.richtext.modules"
                   [readOnly]="to.disabled"
                   [style]="{height: to.richtext.height || '150px'}"

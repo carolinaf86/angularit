@@ -1,9 +1,10 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {NgModule} from '@angular/core';
 import {FormlyRichTextComponent} from './types/richtext';
 import {QuillModule} from 'ngx-quill';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ConfigOption} from '@ngx-formly/core';
 
-export const FORMLY_CONFIG = {
+export const FORMLY_CONFIG: ConfigOption = {
   types: [
     { name: 'richtext', component: FormlyRichTextComponent, extends: 'textarea'},
   ],
