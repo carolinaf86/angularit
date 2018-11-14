@@ -50,7 +50,7 @@ a {
   .btn-primary {
     background-color: $primary;
     border-color: $primary;
-    font-weight: 700;
+    font-weight: 500;
     &:focus {
       box-shadow: 0 0 0 2px $primary;
     }
@@ -58,7 +58,7 @@ a {
   .btn-secondary {
     background-color: $secondary;
     border-color: $secondary;
-    font-weight: 700;
+    font-weight: 500;
     &:focus {
       box-shadow: 0 0 0 2px $secondary;
     }
