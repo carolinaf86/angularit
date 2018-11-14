@@ -46,21 +46,29 @@ export class CommentComponent implements OnInit {
 
     // Only allow edit on comments for logged user
     this.loggedUserId = this.loggedService.getLoggedUserId();
-    this.showEdit = this.model.user_id === this.loggedUserId;
+    this.showEdit = +this.model.user_id === +this.loggedUserId;
   }
 
   onEdit() {
     this.editing = true;
   }
+  onCancel() {
+    // TODO add method
+  }
 
   submit(data: Comment) {
 
-    // Check user has rights to create/update
-    if ((this.isNew && !this.loggedUserId) || (this.loggedUserId !== this.model.user_id)) {
-      this.editing = false;
+    this.editing = false;
+
+    // Check user has rights to create
+    if (this.isNew && !this.loggedUserId) {
+      return this.notificationService.notifyError(null, 'You must be logged in to comment.');
+    }
+
+    // Check user has rights to update
+    if (!this.isNew && (+this.loggedUserId !== +this.model.user_id)) {
       this.showEdit = false;
-      const message = this.isNew ? 'You must be logged in to comment.' : `You cannot update another user's comment!`;
-      return this.notificationService.notifyError(null, message);
+      return this.notificationService.notifyError(null, `You cannot update another user's comment!`);
     }
 
     const updateOrCreate = this.isNew ? this.commentService.create(data) : this.commentService.update(data);
@@ -69,10 +77,9 @@ export class CommentComponent implements OnInit {
       .subscribe((result: Comment) => {
         this.notificationService.notifySuccess('Comment saved successfully!');
         this.model = result;
-        this.editing = false;
         this.showEdit = true;
     }, err => {
-      this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.')
+      this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
     });
   }
 

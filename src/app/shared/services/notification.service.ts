@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {NotifierService} from 'angular-notifier';
+import {NotifierOptions, NotifierService} from 'angular-notifier';
 
-export const NOTIFIER_CONFIG = {
+export const NOTIFIER_CONFIG: NotifierOptions = {
   position: {
     horizontal: {
       position: 'right',

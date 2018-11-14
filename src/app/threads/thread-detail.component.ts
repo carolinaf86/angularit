@@ -59,6 +59,7 @@ export class ThreadDetailComponent implements OnInit {
     this.editing = this.isNew = this.route.snapshot.paramMap.get('id') === 'add';
 
     this.route.data.subscribe((data: { thread: Thread }) => {
+
       this.model = data.thread;
 
       // Clone model for editing
@@ -66,7 +67,8 @@ export class ThreadDetailComponent implements OnInit {
 
       // Create an empty comment
       this.addComment = new Comment({thread_id: data.thread.thread_id});
-      this.showActions = this.model.user_id === this.loggedService.getLoggedUserId();
+      this.showActions = +this.model.user_id === +this.loggedService.getLoggedUserId();
+
     }, err => {
       this.notificationService.notifyError(err, `Oops! We're having problems loading this thread right now.`)
     });
@@ -97,7 +99,7 @@ export class ThreadDetailComponent implements OnInit {
       return this.router.navigateByUrl('/');
     }
     // Check user has right to perform action
-    if (this.loggedService.getLoggedUserId() !== this.model.user_id) {
+    if (+this.loggedService.getLoggedUserId() !== +this.model.user_id) {
       this.notificationService.notifyError(null, 'You cannot delete a thread posted by another user!');
       return this.router.navigateByUrl('/');
     }
@@ -128,6 +130,7 @@ export class ThreadDetailComponent implements OnInit {
 
       this.model = result;
       this.editing = false;
+      this.showActions = true;
 
       this.notificationService.notifySuccess('Thread saved successfully!');
 

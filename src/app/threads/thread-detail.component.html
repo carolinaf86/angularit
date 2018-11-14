@@ -16,8 +16,12 @@
             Posted {{ model.timestamp | timeDifference }} ago.
           </p>
           <p class="thread-body">{{ model.thread_body }}</p>
-          <button *ngIf="showActions" type="button" class="btn btn-primary mr-2" (click)="onEdit()">Edit</button>
-          <button *ngIf="showActions" type="button" class="btn btn-secondary" (click)="onDelete()">Delete</button>
+          <button *ngIf="showActions" type="button" class="btn btn-secondary float-right" (click)="onDelete()">
+            <fa-icon icon="trash"></fa-icon> Delete
+          </button>
+          <button *ngIf="showActions" type="button" class="btn btn-primary mr-2 float-right" (click)="onEdit()">
+            <fa-icon icon="edit"></fa-icon> Edit
+          </button>
 
           <!-- mobile only -->
           <app-votes class="d-lg-none" [model]="model"></app-votes>
@@ -29,8 +33,12 @@
           <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="submit(data)">
               <formly-form [form]="form" [fields]="fields" [model]="data">
-                <button type="button" (click)="onCancel()" class="btn btn-default mr-2">Cancel</button>
-                <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Submit</button>
+                <button type="submit" [disabled]="!form.valid" class="btn btn-primary float-right">
+                  <fa-icon icon="save"></fa-icon> Submit
+                </button>
+                <button type="button" (click)="onCancel()" class="btn btn-default mr-2 float-right">
+                  <fa-icon icon="times"></fa-icon> Cancel
+                </button>
               </formly-form>
             </form>
           </div>
