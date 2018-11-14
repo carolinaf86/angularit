@@ -55,10 +55,10 @@ export class ThreadDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Set editing to true if id is 'add';
-    this.editing = this.isNew = this.route.snapshot.paramMap.get('id') === 'add';
-
     this.route.data.subscribe((data: { thread: Thread }) => {
+
+      // Set editing to true if id is 'add';
+      this.editing = this.isNew = this.route.snapshot.paramMap.get('id') === 'add';
 
       this.model = data.thread;
 
@@ -86,9 +86,12 @@ export class ThreadDetailComponent implements OnInit {
   }
 
   onCancel() {
-    this.isNew
-      ? this.router.navigate(['/'])
-      : this.editing = false;
+    if (this.isNew) {
+      return this.router.navigate(['/']);
+    }
+    // Reset form
+    this.data = {...this.model};
+    this.editing = false;
   }
 
   onDelete() {
