@@ -58,6 +58,10 @@ a {
   .btn-secondary {
     background-color: $secondary;
     border-color: $secondary;
+    font-weight: 700;
+    &:focus {
+      box-shadow: 0 0 0 2px $secondary;
+    }
   }
   .btn-highlight {
     background-color: $highlight;
