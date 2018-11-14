@@ -1,27 +1,67 @@
 <app-navbar></app-navbar>
 <div class="container-fluid angularit-container">
   <div class="row h-100">
-    <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
+
+    <div class="col-xl-3 offset-xl-3 col-lg-4 offset-lg-2 col-6">
       <div class="card top-card">
         <div class="card-body">
-          <h3>{{ model.user_name }}</h3>
-          <p><fa-icon class="user-icon" icon="user-circle"></fa-icon> User for {{ model.registration_timestamp | timeDifference }}</p>
-          <p><strong>Stats:</strong></p>
-          <p>They've given:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.downvotes }}
-          </p>
-          <p>Their posts have received:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.post_upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.post_downvotes }}
-          </p>
-          <p>Their comments have received:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.comment_upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.comment_downvotes }}
-          </p>
+          <h3>
+            <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+            {{ model.user_name }}
+          </h3>
+
+          <div class="user-stats">
+            <p><strong>Stats:</strong></p>
+            <p><strong>{{ model.post_upvotes }}</strong> upvotes on their threads</p>
+            <p><strong>{{ model.post_downvotes }}</strong> downvotes on their threads</p>
+            <p><strong>{{ model.comment_upvotes }}</strong> upvotes on their comments</p>
+            <p><strong>{{ model.comment_downvotes }}</strong> downvotes on their comments</p>
+            <p><strong>{{ model.upvotes }}</strong> upvotes to others</p>
+            <p><strong>{{ model.downvotes }}</strong> downvotes to others</p>
+            <p>User for <strong>{{ model.registration_timestamp | timeDifference }}</strong></p>
+          </div>
         </div>
       </div>
-      <app-thread-list-item *ngFor="let thread of threads" [model]="thread"></app-thread-list-item>
+
+      <div class="card">
+        <div class="card-body">
+          <h5>
+            <fa-icon class="trophy-icon" icon="trophy"></fa-icon> {{ comments[0].comment_body }}
+          </h5>
+          <app-votes class="float-right" [model]="comments[0]" type="comment"></app-votes>
+          <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ comments[0].timestamp | timeDifference }} ago</small>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let comment of comments; let i = index">
+        <app-comment *ngIf="i > 0 && i < 6" [model]="comment" [noEdit]="true"></app-comment>
+      </ng-container>
+
+    </div>
+
+    <div class="col-xl-3 col-lg-4 col-6">
+      <div class="card top-card">
+        <div class="card-body">
+          <a class="card-title d-block" [routerLink]="'/threads/' + threads[0].thread_id">
+            <fa-icon class="trophy-icon" icon="trophy"></fa-icon> {{ threads[0].thread_title }}
+          </a>
+          <small>
+            <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
+            Posted {{ threads[0].timestamp | timeDifference }} ago.
+          </small>
+          <ng-container *ngIf="threads[0].user_name">
+            <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+            <a [routerLink]="'/users/' + threads[0].user_id" class="user-link">{{ threads[0].user_name }}</a>
+          </ng-container>
+
+          <app-votes class="float-right" [model]="threads[0]" type="thread"></app-votes>
+
+          <p class="card-text">{{ threads[0].thread_body }}</p>
+        </div>
+      </div>
+      <ng-container *ngFor="let thread of threads; let i = index">
+        <app-thread-list-item *ngIf="i > 0 && i < 6" [model]="thread"></app-thread-list-item>
+      </ng-container>
     </div>
   </div>
 </div>

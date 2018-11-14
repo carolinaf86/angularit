@@ -1,8 +1,11 @@
 <div class="card">
   <div *ngIf="!editing;else editable" class="card-body">
     <app-votes class="float-right" [model]="model" type="comment"></app-votes>
-    <fa-icon class="user-icon" icon="user-circle"></fa-icon>
-    <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
+    <ng-container *ngIf="model.user_id && model.user_name">
+      <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+      <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
+    </ng-container>
+
     <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
     <p class="card-text">{{ model.comment_body }}</p>
     <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-primary float-right">

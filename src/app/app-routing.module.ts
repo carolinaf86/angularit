@@ -9,6 +9,7 @@ import {UserDetailResolver} from './shared/resolvers/user-resolver.service';
 import {UserThreadsResolverService} from './shared/resolvers/user-threads-resolver.service';
 import {ThreadsResolverService} from './shared/resolvers/threads-resolver.service';
 import {ThreadResolverService} from './shared/resolvers/thread-resolver.service';
+import {UserCommentsResolverService} from './shared/resolvers/user-comments-resolver.service';
 
 const routes: Routes = [
   {
@@ -24,8 +25,15 @@ const routes: Routes = [
     path: 'threads/:id', component: ThreadDetailComponent, resolve: { thread: ThreadResolverService }
   },
   {
-    path: 'users/:id', component: UserDetailComponent, resolve: { user: UserDetailResolver, threads: UserThreadsResolverService }
-    },
+    path: 'users/:id',
+    component: UserDetailComponent,
+    resolve:
+      {
+        user: UserDetailResolver,
+        threads: UserThreadsResolverService,
+        comments: UserCommentsResolverService
+      }
+  },
   {
     path: '**', redirectTo: ''
   }

@@ -10,7 +10,7 @@ import {
   faPlus,
   faSave, faSignInAlt, faSignOutAlt,
   faTimes,
-  faTrash, faUser,
+  faTrash, faTrophy, faUser,
   faUserAstronaut, faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,6 +27,7 @@ library.add(faSignInAlt);
 library.add(faSignOutAlt);
 library.add(faUser);
 library.add(faUserPlus);
+library.add(faTrophy);
 
 @NgModule({
   imports: [FontAwesomeModule],
