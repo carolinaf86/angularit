@@ -3,7 +3,7 @@
   <div class="card-body">
 
     <h5>
-      <a class="card-title d-block" [routerLink]="'/threads/' + model.thread_id">{{ model.thread_title }}</a>
+      <a class="card-title d-block" [routerLink]="'/threads/' + model.thread_id">{{ model.thread_title | truncate: [160] }}</a>
     </h5>
 
     <hr>
@@ -20,7 +20,7 @@
 
     <app-votes class="float-right" [model]="model" type="thread"></app-votes>
 
-    <p class="card-text" [innerHtml]="model.thread_body | safeHtml"></p>
+    <p class="card-text" [innerHtml]="model.thread_body | truncate: [340] | safeHtml"></p>
   </div>
 
 </div>

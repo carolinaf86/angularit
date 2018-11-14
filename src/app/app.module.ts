@@ -20,6 +20,7 @@ import {FormlyModule} from '@ngx-formly/core';
 import {RegisterComponent} from './register/register.component';
 import {FORMLY_CONFIG, FormlyTypesModule} from './shared/formly/formlyTypes.module';
 import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
+import {TruncatePipe} from './shared/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
     VotesComponent,
     LoginComponent,
     RegisterComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    TruncatePipe
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
   providers: [
     httpInterceptorProviders,
     TimeDifferencePipe,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    TruncatePipe
   ],
   bootstrap: [AppComponent]
 })
