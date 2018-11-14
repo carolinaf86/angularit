@@ -15,7 +15,7 @@
             <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
             Posted {{ model.timestamp | timeDifference }} ago.
           </p>
-          <p class="thread-body">{{ model.thread_body }}</p>
+          <p class="thread-body" [innerHtml]=" model.thread_body | safeHtml"></p>
           <button *ngIf="showActions" type="button" class="btn btn-secondary float-right" (click)="onDelete()">
             <fa-icon icon="trash"></fa-icon> Delete
           </button>
