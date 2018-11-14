@@ -2,11 +2,24 @@
 
 body {
   font-family: $main-font;
+  font-size: 13px;
 
   h1, h2, h3, h4, h5, h6 {
     font-family: $title-font;
     color: $text-highlight;
     font-weight: 400;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  h4 {
+    margin-bottom: 15px
+  }
+
+  h5 {
+    margin-bottom: 10px;
   }
 
   p, small {

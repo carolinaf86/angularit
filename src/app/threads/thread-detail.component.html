@@ -8,18 +8,26 @@
           <!-- web only -->
           <app-votes class="float-lg-right d-none d-lg-inline" [model]="model" type="thread"></app-votes>
 
-          <h3>{{ model.thread_title }}</h3>
-          <fa-icon class="user-icon" icon="user-circle"></fa-icon>
-          <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
-          <p>
-            <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
-            Posted {{ model.timestamp | timeDifference }} ago.
-          </p>
+          <h4>{{ model.thread_title }}</h4>
+
+          <hr>
+
+          <ul class="list-inline thread-info">
+            <li class="list-inline-item mb-1">
+              <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+              <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
+            </li>
+            <li class="list-inline-item mb-1">
+              <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
+              Posted {{ model.timestamp | timeDifference }} ago.
+            </li>
+          </ul>
+
           <p class="thread-body">{{ model.thread_body }}</p>
-          <button *ngIf="showActions" type="button" class="btn btn-secondary float-right" (click)="onDelete()">
+          <button *ngIf="showActions" type="button" class="btn btn-sm btn-secondary float-right" (click)="onDelete()">
             <fa-icon icon="trash"></fa-icon> Delete
           </button>
-          <button *ngIf="showActions" type="button" class="btn btn-primary mr-2 float-right" (click)="onEdit()">
+          <button *ngIf="showActions" type="button" class="btn btn-sm btn-primary mr-2 float-right" (click)="onEdit()">
             <fa-icon icon="edit"></fa-icon> Edit
           </button>
 
@@ -33,10 +41,10 @@
           <div class="card-body">
             <form [formGroup]="form" (ngSubmit)="submit(data)">
               <formly-form [form]="form" [fields]="fields" [model]="data">
-                <button type="submit" [disabled]="!form.valid" class="btn btn-primary float-right">
+                <button type="submit" [disabled]="!form.valid" class="btn btn-sm btn-primary float-right">
                   <fa-icon icon="save"></fa-icon> Submit
                 </button>
-                <button type="button" (click)="onCancel()" class="btn btn-default mr-2 float-right">
+                <button type="button" (click)="onCancel()" class="btn btn-sm btn-default mr-2 float-right">
                   <fa-icon icon="times"></fa-icon> Cancel
                 </button>
               </formly-form>

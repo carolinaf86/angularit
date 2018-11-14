@@ -11,11 +11,11 @@ type CommentOrThread = Comment | Thread;
   selector: 'app-votes',
   template: `
     <div class="votes-container">
-      <button class="vote-btn" (click)="upvote()">
+      <button class="vote-btn upvote" (click)="upvote()">
         <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon>
       </button> {{ (model.upvotes || 0) - (model.downvotes || 0) }}
-      <button class="vote-btn" (click)="downvote()">
-        <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon>
+      <button class="vote-btn downvote" (click)="downvote()">
+        <fa-icon class="vote-icon downvote" icon="arrow-circle-down"></fa-icon>
       </button>
     </div>
   `,

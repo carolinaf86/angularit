@@ -2,32 +2,58 @@
 <div class="container-fluid angularit-container">
   <div class="row h-100">
 
-    <div class="col-xl-3 offset-xl-3 col-lg-4 offset-lg-2 col-md-6">
+    <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+
       <div class="card top-card">
         <div class="card-body">
           <h3>
-            <fa-icon class="user-icon" icon="user-circle"></fa-icon>
+            <fa-icon class="user-icon mr-2" icon="user-circle"></fa-icon>
             {{ model.user_name }}
           </h3>
 
-          <div class="user-stats">
-            <p><strong>Stats:</strong></p>
-            <p><strong>{{ model.post_upvotes }}</strong> upvotes on their threads</p>
-            <p><strong>{{ model.post_downvotes }}</strong> downvotes on their threads</p>
-            <p><strong>{{ model.comment_upvotes }}</strong> upvotes on their comments</p>
-            <p><strong>{{ model.comment_downvotes }}</strong> downvotes on their comments</p>
-            <p><strong>{{ model.upvotes }}</strong> upvotes to others</p>
-            <p><strong>{{ model.downvotes }}</strong> downvotes to others</p>
-            <p>User for <strong>{{ model.registration_timestamp | timeDifference }}</strong></p>
+          <hr>
+
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi bibendum neque egestas congue quisque egestas diam. Commodo quis imperdiet massa tincidunt nunc. Ultrices gravida dictum fusce ut placerat orci nulla.
+          </p>
+
+          <hr>
+
+          <div class="row voting-history">
+            <div class="col-lg-4 col-md-6">
+              <strong class="mr-1">Threads:</strong>
+              <fa-icon class="mr-1 ml-1" icon="arrow-up"></fa-icon> {{ model.post_upvotes }}
+              <fa-icon class="mr-1 ml-1" icon="arrow-down" size="sm"></fa-icon> {{ model.post_downvotes }}
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <strong class="mr-1">Comments:</strong>
+              <fa-icon class="mr-1 ml-1" icon="arrow-up" size="sm"></fa-icon> {{ model.comment_upvotes }}
+              <fa-icon class="mr-1 ml-1" icon="arrow-down" size="sm"></fa-icon> {{ model.comment_downvotes }}
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <strong class="mr-1">Voting:</strong>
+              <fa-icon class="mr-1 ml-1" icon="arrow-up" size="sm"></fa-icon> {{ model.upvotes }}
+              <fa-icon class="mr-1 ml-1" icon="arrow-down" size="sm"></fa-icon> {{ model.downvotes }}
+            </div>
           </div>
+
         </div>
       </div>
+
+
+
+    </div>
+
+    <div class="col-xl-3 offset-xl-3 col-lg-4 offset-lg-2 col-md-6">
+
 
       <div class="card d-none d-md-block">
         <div class="card-body">
           <h5>
             <fa-icon class="trophy-icon" icon="trophy"></fa-icon> {{ comments[0].comment_body }}
           </h5>
+          <hr>
+
           <app-votes class="float-right" [model]="comments[0]" type="comment"></app-votes>
           <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ comments[0].timestamp | timeDifference }} ago</small>
         </div>
