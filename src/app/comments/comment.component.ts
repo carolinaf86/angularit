@@ -53,7 +53,8 @@ export class CommentComponent implements OnInit {
     this.editing = true;
   }
   onCancel() {
-    // TODO add method
+    this.data = {...this.model};
+    this.editing = false;
   }
 
   submit(data: Comment) {
@@ -78,6 +79,7 @@ export class CommentComponent implements OnInit {
         this.notificationService.notifySuccess('Comment saved successfully!');
         this.model = result;
         this.showEdit = true;
+        this.isNew = false;
     }, err => {
       this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
     });
