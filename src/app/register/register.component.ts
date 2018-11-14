@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {User} from '../shared/sdk/models/User';
 import {UserService} from '../shared/sdk/services/user.service';
 import {AuthService} from '../shared/services/auth.service';
@@ -46,11 +46,11 @@ export class RegisterComponent {
         required: true
       },
       validators: {
-        min: Validators.min(8)
-      },
-      validation: {
-        messages: {
-          min: 'Password must be at least 8 characters.'
+        min: {
+          expression: (control: FormControl): boolean => {
+            return control.value.length >= 8;
+          },
+          message: 'Password must be at least 8 characters.'
         }
       }
     }
