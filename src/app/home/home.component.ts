@@ -27,12 +27,4 @@ export class HomeComponent implements OnInit {
     this.isLoggedIn = this.loggedService.isLoggedIn();
   }
 
-  onLoggedOut() {
-    this.isLoggedIn = false;
-  }
-
-  onAdd() {
-    this.router.navigate(['threads', 'add']);
-  }
-
 }

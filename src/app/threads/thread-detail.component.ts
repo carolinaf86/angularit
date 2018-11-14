@@ -77,10 +77,6 @@ export class ThreadDetailComponent implements OnInit {
 
   }
 
-  onLoggedOut() {
-    this.isLoggedIn = false;
-  }
-
   onEdit() {
     this.editing = true;
   }

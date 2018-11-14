@@ -24,7 +24,8 @@ export class CommentComponent implements OnInit {
   showEdit: boolean;
   loggedUserId: string;
 
-  constructor(private commentService: CommentService, private loggedService: AuthService, private notificationService: NotificationService) {
+  constructor(private commentService: CommentService, private loggedService: AuthService,
+              private notificationService: NotificationService) {
     this.fields = [
       {
         key: 'comment_body',

@@ -9,7 +9,6 @@ import {NotificationService} from '../../shared/services/notification.service';
   styleUrls: ['navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  @Output() loggedOut: EventEmitter<boolean> = new EventEmitter<boolean>();
   isCollapsed = false;
   loggedUserId: string;
   constructor(private loggedService: AuthService, private router: Router, private notificationService: NotificationService) { }
@@ -22,7 +21,7 @@ export class NavbarComponent implements OnInit {
     this.loggedService.clearLoggedUser();
     this.loggedUserId = null;
     this.notificationService.notifySuccess(`You've been logged out.`);
-    this.loggedOut.emit(true);
+    this.router.navigate(['/login']);
   }
 
   onAdd() {

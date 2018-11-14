@@ -29,8 +29,4 @@ export class UserDetailComponent implements OnInit {
 
   }
 
-  onLoggedOut() {
-    this.isLoggedIn = false;
-  }
-
 }
