@@ -44,6 +44,14 @@ export class RegisterComponent {
         type: 'password',
         placeholder: 'Password',
         required: true
+      },
+      validators: {
+        min: Validators.min(8)
+      },
+      validation: {
+        messages: {
+          min: 'Password must be at least 8 characters.'
+        }
       }
     }
   ];

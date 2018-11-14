@@ -124,7 +124,7 @@ export class ThreadDetailComponent implements OnInit {
     observable.subscribe((result: Thread) => {
 
       if (result['form_errors']) {
-        this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
+        return this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
       }
 
       this.model = result;
