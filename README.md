@@ -6,7 +6,7 @@
 
 ## REQUIREMENTS
 
-For Linux and Windows this project requires that you have the latest versions of the following installed:
+In order to develop with docker, for Linux and Windows this project requires that you have the latest versions of the following installed:
 
  * [Docker](https://www.docker.com)
  * [Docker Compose](https://docs.docker.com/compose)
@@ -17,10 +17,10 @@ For Mac OS you must have the following installed:
  
  ## QUICKSTART
  
- From the root directory of the repository run the following:
+ If developing with docker, from the root directory of the repository run the following:
  
  ```bash
- docker-compose up -d              # create the docker container
+ docker-compose up -d 
  ```
  
  You can tail the logs of the container with this command:
@@ -28,6 +28,12 @@ For Mac OS you must have the following installed:
  ```bash
  docker-compose logs -f
  ```
+ 
+ Alternatively, from the root directory of the repository run the following:
+ 
+  ```bash
+  npm run start
+  ```
  
  Navigate to [http://localhost:4200](http://localhost:4200) to view the project.
  
