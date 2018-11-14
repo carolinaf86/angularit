@@ -23,7 +23,7 @@
             </li>
           </ul>
 
-          <p class="thread-body">{{ model.thread_body }}</p>
+          <p class="thread-body"  [innerHtml]=" model.thread_body | safeHtml"></p>
           <button *ngIf="showActions" type="button" class="btn btn-sm btn-secondary float-right" (click)="onDelete()">
             <fa-icon icon="trash"></fa-icon> Delete
           </button>
