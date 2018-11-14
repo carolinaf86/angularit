@@ -47,7 +47,6 @@ export class ThreadDetailComponent implements OnInit {
           label: 'Body',
           placeholder: 'Add more information...',
           required: true,
-          rows: 6,
           richtext: {
             modules: {
               toolbar: [
