@@ -52,6 +52,9 @@ export class CommentComponent implements OnInit {
   onEdit() {
     this.editing = true;
   }
+  onCancel() {
+    // TODO add method
+  }
 
   submit(data: Comment) {
 

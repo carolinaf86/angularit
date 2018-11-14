@@ -5,14 +5,20 @@
     <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
     <small class="d-block"><fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago</small>
     <p class="card-text">{{ model.comment_body }}</p>
-    <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-secondary float-right">Edit</button>
+    <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-secondary float-right">
+      <fa-icon icon="edit"></fa-icon> Edit
+    </button>
   </div>
   <ng-template #editable>
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="submit(data)">
         <formly-form [form]="form" [fields]="fields" [model]="data">
-          <button type="submit" [disabled]="!form.valid" class="btn btn-primary float-right">Submit</button>
-          <button *ngIf="!isNew" type="button" (click)="onCancel()" class="btn btn-default mr-2 float-right">Cancel</button>
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary float-right">
+            <fa-icon icon="save"></fa-icon> Submit
+          </button>
+          <button *ngIf="!isNew" type="button" (click)="onCancel()" class="btn btn-default mr-2 float-right">
+            <fa-icon icon="times"></fa-icon> Cancel
+          </button>
         </formly-form>
       </form>
     </div>
