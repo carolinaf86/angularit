@@ -22,7 +22,9 @@ export class UserDetailComponent implements OnInit {
 
     this.route.data.subscribe((data: {user: User, threads: Thread[]}) => {
       this.model = data.user;
-      this.threads = data.threads;
+      this.threads = data.threads.sort((a, b) => {
+        return (a.upvotes - a.downvotes) < (b.upvotes - b.downvotes);
+      });
     });
     this.isLoggedIn = this.loggedService.isLoggedIn();
     console.log('Logged in', this.isLoggedIn);
