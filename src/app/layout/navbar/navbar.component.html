@@ -15,16 +15,16 @@
         </a>
       </li>
       <li class="nav-item">
-        <a *ngIf="!loggedUserId;else logoutLink" class="nav-link" routerLink="/login">Log in</a>
+        <a *ngIf="!loggedUserId;else logoutLink" class="nav-link" routerLink="/login"><fa-icon icon="sign-in-alt"></fa-icon> Log in</a>
         <ng-template #logoutLink>
-          <a class="nav-link" #logoutLink (click)="logout()">Logout</a>
+          <a class="nav-link" #logoutLink (click)="logout()"><fa-icon icon="sign-out-alt"></fa-icon> Logout</a>
         </ng-template>
       </li>
       <li *ngIf="!loggedUserId" class="nav-item">
-        <a class="nav-link" routerLink="/register">Register</a>
+        <a class="nav-link" routerLink="/register"><fa-icon icon="user-plus"></fa-icon> Register</a>
       </li>
       <li *ngIf="loggedUserId" class="nav-item">
-        <a class="nav-link" [routerLink]="'/users/' + loggedUserId">Profile</a>
+        <a class="nav-link" [routerLink]="'/users/' + loggedUserId"><fa-icon icon="user"></fa-icon> Profile</a>
       </li>
     </ul>
   </div>

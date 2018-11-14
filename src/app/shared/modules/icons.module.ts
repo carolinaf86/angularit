@@ -8,10 +8,10 @@ import {
   faArrowCircleUp,
   faEdit,
   faPlus,
-  faSave,
+  faSave, faSignInAlt, faSignOutAlt,
   faTimes,
-  faTrash,
-  faUserAstronaut
+  faTrash, faUser,
+  faUserAstronaut, faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faUserCircle);
@@ -23,6 +23,10 @@ library.add(faEdit);
 library.add(faSave);
 library.add(faTrash);
 library.add(faTimes);
+library.add(faSignInAlt);
+library.add(faSignOutAlt);
+library.add(faUser);
+library.add(faUserPlus);
 
 @NgModule({
   imports: [FontAwesomeModule],
