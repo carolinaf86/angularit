@@ -25,10 +25,10 @@ export class UserDetailComponent implements OnInit {
     this.route.data.subscribe((data: {user: User, threads: Thread[], comments: Comment[]}) => {
       this.model = data.user;
       this.threads = data.threads.sort((a, b) => {
-        return (a.upvotes - a.downvotes) < (b.upvotes - b.downvotes);
+        return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
       });
       this.comments = data.comments.sort((a, b) => {
-        return (a.upvotes - a.downvotes) < (b.upvotes - b.downvotes);
+        return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
       });
     });
     this.isLoggedIn = this.loggedService.isLoggedIn();
