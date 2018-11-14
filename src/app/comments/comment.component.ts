@@ -30,11 +30,21 @@ export class CommentComponent implements OnInit {
     this.fields = [
       {
         key: 'comment_body',
-        type: 'textarea',
+        type: 'richtext',
         templateOptions: {
           placeholder: 'Add a comment...',
           required: true,
-          rows: 6
+          richtext: {
+            min: 1,
+            max: 8000,
+            modules: {
+              toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                [{'script': 'sub'}, {'script': 'super'}],
+                [{'color': []}, {'background': []}]
+              ]
+            }
+          }
         },
         validators: {
           max: {
@@ -69,6 +79,7 @@ export class CommentComponent implements OnInit {
   onEdit() {
     this.editing = true;
   }
+
   onCancel() {
     this.data = {...this.model};
     this.editing = false;
@@ -97,9 +108,9 @@ export class CommentComponent implements OnInit {
         this.model = result;
         this.showEdit = true;
         this.isNew = false;
-    }, err => {
-      this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
-    });
+      }, err => {
+        this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
+      });
   }
 
 }

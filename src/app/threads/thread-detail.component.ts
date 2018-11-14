@@ -51,12 +51,22 @@ export class ThreadDetailComponent implements OnInit {
       },
       {
         key: 'thread_body',
-        type: 'textarea',
+        type: 'richtext',
         templateOptions: {
           label: 'Body',
           placeholder: 'Add more information...',
           required: true,
-          rows: 6
+          richtext: {
+            min: 1,
+            max: 64000,
+            modules: {
+              toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],
+                [{'script': 'sub'}, {'script': 'super'}],
+                [{'color': []}, {'background': []}]
+              ]
+            }
+          }
         },
         validators: {
           max: {

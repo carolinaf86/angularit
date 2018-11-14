@@ -17,8 +17,9 @@ import {httpInterceptorProviders} from './shared/http-interceptors';
 import {VotesComponent} from './votes/votes.component';
 import {LoginComponent} from './login/login.component';
 import {FormlyModule} from '@ngx-formly/core';
-import {FORMLY_CONFIG} from './shared/formly-config';
 import {RegisterComponent} from './register/register.component';
+import {FORMLY_CONFIG, FormlyTypesModule} from './shared/formly/formlyTypes.module';
+import {SafeHtmlPipe} from './shared/pipes/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {RegisterComponent} from './register/register.component';
     UserDetailComponent,
     VotesComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -41,11 +43,13 @@ import {RegisterComponent} from './register/register.component';
     BrowserAnimationsModule,
     RequirementsModule,
     LayoutModule,
-    FormlyModule.forRoot(FORMLY_CONFIG)
+    FormlyModule.forRoot(FORMLY_CONFIG),
+    FormlyTypesModule
   ],
   providers: [
     httpInterceptorProviders,
-    TimeDifferencePipe
+    TimeDifferencePipe,
+    SafeHtmlPipe
   ],
   bootstrap: [AppComponent]
 })

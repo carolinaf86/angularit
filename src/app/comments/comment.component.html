@@ -1,6 +1,5 @@
 <div class="card">
-  <div *ngIf="!editing; else editable" class="card-body">
-
+  <div *ngIf="!editing;else editable" class="card-body">
     <app-votes class="float-right" [model]="model" type="comment"></app-votes>
 
     <ul class="list-inline" *ngIf="model.user_id && model.user_name">
@@ -15,7 +14,7 @@
 
 
 
-    <p class="card-text">{{ model.comment_body }}</p>
+    <p class="card-text" [innerHtml]="model.comment_body | safeHtml"></p>
     <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-sm btn-primary float-right">
       <fa-icon icon="edit"></fa-icon> Edit
     </button>
