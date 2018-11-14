@@ -14,6 +14,7 @@ import {NotificationService} from '../shared/services/notification.service';
 export class CommentComponent implements OnInit {
 
   @Input() model: Comment;
+  @Input() noEdit: boolean;
 
   editing: boolean;
 
@@ -56,6 +57,12 @@ export class CommentComponent implements OnInit {
 
     // Only allow edit on comments for logged user
     this.loggedUserId = this.loggedService.getLoggedUserId();
+
+    if (this.noEdit) {
+      this.showEdit = false;
+      return;
+    }
+
     this.showEdit = +this.model.user_id === +this.loggedUserId;
   }
 

@@ -5,12 +5,12 @@ import {faClock} from '@fortawesome/free-regular-svg-icons';
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons/faUserCircle';
 import {
   faArrowCircleDown,
-  faArrowCircleUp,
+  faArrowCircleUp, faArrowDown, faArrowUp,
   faEdit,
   faPlus,
   faSave, faSignInAlt, faSignOutAlt,
   faTimes,
-  faTrash, faUser,
+  faTrash, faTrophy, faUser,
   faUserAstronaut, faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,6 +27,9 @@ library.add(faSignInAlt);
 library.add(faSignOutAlt);
 library.add(faUser);
 library.add(faUserPlus);
+library.add(faTrophy);
+library.add(faArrowUp);
+library.add(faArrowDown);
 
 @NgModule({
   imports: [FontAwesomeModule],

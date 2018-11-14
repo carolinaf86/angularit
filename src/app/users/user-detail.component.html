@@ -1,27 +1,59 @@
 <app-navbar></app-navbar>
 <div class="container-fluid angularit-container">
   <div class="row h-100">
-    <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
+
+    <div class="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
+
       <div class="card top-card">
         <div class="card-body">
-          <h3>{{ model.user_name }}</h3>
-          <p><fa-icon class="user-icon" icon="user-circle"></fa-icon> User for {{ model.registration_timestamp | timeDifference }}</p>
-          <p><strong>Stats:</strong></p>
-          <p>They've given:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.downvotes }}
+          <h3>
+            <fa-icon class="user-icon mr-2" icon="user-circle"></fa-icon>
+            {{ model.user_name }}
+          </h3>
+
+          <hr>
+
+          <p class="card-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mi bibendum neque egestas congue quisque egestas diam. Commodo quis imperdiet massa tincidunt nunc. Ultrices gravida dictum fusce ut placerat orci nulla.
           </p>
-          <p>Their posts have received:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.post_upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.post_downvotes }}
-          </p>
-          <p>Their comments have received:
-            <fa-icon class="vote-icon" icon="arrow-circle-up"></fa-icon> {{ model.comment_upvotes }}
-            <fa-icon class="vote-icon" icon="arrow-circle-down"></fa-icon> {{ model.comment_downvotes }}
-          </p>
+
+          <hr>
+
+          <div class="row voting-history">
+            <div class="col-lg-4 col-md-6">
+              <strong class="mr-1">Threads:</strong>
+              <fa-icon class="mr-1 ml-1" icon="arrow-up"></fa-icon> {{ model.post_upvotes }}
+              <fa-icon class="mr-1 ml-1" icon="arrow-down" size="sm"></fa-icon> {{ model.post_downvotes }}
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <strong class="mr-1">Comments:</strong>
+              <fa-icon class="mr-1 ml-1" icon="arrow-up" size="sm"></fa-icon> {{ model.comment_upvotes }}
+              <fa-icon class="mr-1 ml-1" icon="arrow-down" size="sm"></fa-icon> {{ model.comment_downvotes }}
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <strong class="mr-1">Voting:</strong>
+              <fa-icon class="mr-1 ml-1" icon="arrow-up" size="sm"></fa-icon> {{ model.upvotes }}
+              <fa-icon class="mr-1 ml-1" icon="arrow-down" size="sm"></fa-icon> {{ model.downvotes }}
+            </div>
+          </div>
+
         </div>
       </div>
-      <app-thread-list-item *ngFor="let thread of threads" [model]="thread"></app-thread-list-item>
+
+      <ngb-tabset type="pills">
+        <ngb-tab title="Threads">
+          <ng-template ngbTabContent>
+              <app-thread-list-item *ngFor="let thread of threads;" [model]="thread"></app-thread-list-item>
+          </ng-template>
+        </ngb-tab>
+        <ngb-tab title="Comments">
+          <ng-template ngbTabContent>
+            <app-comment *ngFor="let comment of comments;" [model]="comment" [noEdit]="true"></app-comment>
+          </ng-template>
+        </ngb-tab>
+      </ngb-tabset>
+
     </div>
+
   </div>
 </div>

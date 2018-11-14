@@ -14,10 +14,6 @@ a {
     margin-left: 5px;
   }
   &.card-title {
-    font-size: 1.5rem !important;
-    line-height: 1.2;
-    font-family: $title-font;
-    font-weight: 400;
     color: $text-highlight;
     &:hover {
       color: $text-highlight;
@@ -96,6 +92,14 @@ button.vote-btn {
   &:focus {
     outline: none;
   }
+
+  &.upvote {
+
+  }
+
+  &.downvote .vote-icon {
+    color: red;
+  }
 }
 
 /* Icons */
@@ -104,7 +108,7 @@ fa-icon {
     color: $secondary;
   }
   &.clock-icon {
-    color: $secondary;
+    color: $text-grey;
   }
   &.vote-icon {
     color: $primary;
@@ -118,5 +122,17 @@ notifier-notification {
   }
   &.notifier__notification--success {
     background-color: $secondary;
+  }
+}
+
+ngb-tabset {
+  ul li a {
+    color: $text-grey;
+    &:hover {
+      color: $text-highlight;
+    }
+    &.active {
+      background-color: $primary !important;
+    }
   }
 }

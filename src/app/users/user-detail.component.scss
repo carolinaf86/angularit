@@ -2,4 +2,18 @@
 
 .user-detail {
   padding: 20px;
-  border: 2px solid $highlight;}
+  border: 2px solid $highlight;
+}
+.user-stats p {
+  margin-bottom: 4px;
+}
+
+.trophy-icon {
+  color: $primary;
+  margin-right: 5px;
+}
+
+.voting-history {
+  color: $text-grey;
+  font-size: small;
+}

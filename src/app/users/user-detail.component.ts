@@ -3,6 +3,7 @@ import {User} from '../shared/sdk/models/User';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
+import {Comment} from '../shared/sdk/models/Comment';
 
 @Component({
   selector: 'app-user-detail',
@@ -13,6 +14,7 @@ export class UserDetailComponent implements OnInit {
 
   model: User;
   threads: Thread[];
+  comments: Comment[];
   isLoggedIn: boolean;
 
   constructor(private route: ActivatedRoute, private loggedService: AuthService) {
@@ -20,12 +22,16 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.route.data.subscribe((data: {user: User, threads: Thread[]}) => {
+    this.route.data.subscribe((data: {user: User, threads: Thread[], comments: Comment[]}) => {
       this.model = data.user;
-      this.threads = data.threads;
+      this.threads = data.threads.sort((a, b) => {
+        return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
+      });
+      this.comments = data.comments.sort((a, b) => {
+        return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
+      });
     });
     this.isLoggedIn = this.loggedService.isLoggedIn();
-    console.log('Logged in', this.isLoggedIn);
 
   }
 
