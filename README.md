@@ -4,6 +4,7 @@
  * [Quickstart](#Quickstart)
  * [Useful Commands](Useful-Commands)
  * [Test User](Test-User)
+ * [Inclusions](Inclusions)
 
 ## REQUIREMENTS
 
@@ -52,3 +53,13 @@ In order to develop with docker this project requires that you have the latest v
   * password: password123
   
   Or navigate to [registration](http://localhost:4200/register) to register a new user
+  
+  ## Inclusions
+  
+  In addition to the basic requirements, the following features have been included:
+  
+  * Upvotes and downvotes calculated as totals
+  * Ordering threads and comments by popularity (see user-detail component, /user/:id)
+  * Quilljs editor to allow users to format their comments and thread bodies
+  * Verifying a user has rights to edit/delete/create a thread or comment before calling API
+  * Ellipsis of thread title and body when listing
