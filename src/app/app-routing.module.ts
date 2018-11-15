@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {UserDetailComponent} from './users/user-detail.component';
@@ -13,7 +13,7 @@ import {UserCommentsResolverService} from './shared/resolvers/user-comments-reso
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, resolve: { threads: ThreadsResolverService }
+    path: '', component: HomeComponent, resolve: {threads: ThreadsResolverService}
   },
   {
     path: 'login', component: LoginComponent
@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'register', component: RegisterComponent
   },
   {
-    path: 'threads/:id', component: ThreadDetailComponent, resolve: { thread: ThreadResolverService }
+    path: 'threads/:id', component: ThreadDetailComponent, resolve: {thread: ThreadResolverService}
   },
   {
     path: 'users/:id',
@@ -43,4 +43,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -17,22 +17,21 @@ export class UserDetailComponent implements OnInit {
   comments: Comment[];
   isLoggedIn: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: AuthService) {
+  constructor(private route: ActivatedRoute, private authService: AuthService) {
   }
 
   ngOnInit() {
 
     this.route.data.subscribe((data: {user: User, threads: Thread[], comments: Comment[]}) => {
       this.model = data.user;
-      this.threads = data.threads.sort((a, b) => {
-        return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
-      });
-      this.comments = data.comments.sort((a, b) => {
-        return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
-      });
+      this.threads = data.threads.sort(this.sortByVotes);
+      this.comments = data.comments.sort(this.sortByVotes);
     });
-    this.isLoggedIn = this.loggedService.isLoggedIn();
 
+    this.isLoggedIn = this.authService.isAuthenticated();
   }
 
+  private sortByVotes(a: Thread | Comment, b: Thread | Comment): number {
+    return (b.upvotes - b.downvotes) - (a.upvotes - a.downvotes);
+  }
 }

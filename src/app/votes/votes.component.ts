@@ -5,8 +5,6 @@ import {ThreadService} from '../shared/sdk/services/thread.service';
 import {CommentService} from '../shared/sdk/services/comment.service';
 import {NotificationService} from '../shared/services/notification.service';
 
-type CommentOrThread = Comment | Thread;
-
 @Component({
   selector: 'app-votes',
   template: `
@@ -29,42 +27,52 @@ export class VotesComponent {
               private notificationService: NotificationService) { }
 
   upvote() {
-    // TODO create union type to stop compiler complaining
+
     const { model, threadService, commentService, type } = this;
+
     if (type === 'thread') {
+
       threadService.upvote(model.thread_id)
         .subscribe((data: Thread) => {
           this.model = data;
         }, err => {
           this.handleError(err);
         });
+
     } else {
+
       commentService.upvote(model['comment_id'])
         .subscribe((data: Comment) => {
           this.model = data;
         }, err => {
           this.handleError(err);
         });
+
     }
   }
 
   downvote() {
+
     const { model, threadService, commentService, type } = this;
 
     if (type === 'thread') {
+
       threadService.downvote(model.thread_id)
         .subscribe((data: Thread) => {
           this.model = data;
       }, err => {
           this.handleError(err);
         });
+
     } else {
+
       commentService.downvote(model['comment_id'])
         .subscribe((data: Comment) => {
           this.model = data;
         }, err => {
           this.handleError(err);
         });
+
     }
   }
 

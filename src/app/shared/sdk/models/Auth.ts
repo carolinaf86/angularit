@@ -20,7 +20,7 @@ export interface CredentialsInterface {
 
 export class Credentials {
   email?: string;
-  password?: string;
+
   constructor(data?: CredentialsInterface) {
     Object.assign(this, data);
   }

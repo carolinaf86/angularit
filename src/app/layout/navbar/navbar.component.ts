@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../shared/services/auth.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../shared/services/notification.service';
@@ -9,24 +9,29 @@ import {NotificationService} from '../../shared/services/notification.service';
   styleUrls: ['navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+
   isCollapsed = false;
-  loggedUserId: string;
-  constructor(private loggedService: AuthService, private router: Router, private notificationService: NotificationService) { }
+  userId: string;
+
+  constructor(private authService: AuthService,
+              private router: Router,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
-    this.loggedUserId = this.loggedService.getLoggedUserId();
+    this.authService.getAuthenticatedUser()
+    this.userId = this.authService.getAuthenticatedUserId();
   }
 
   logout() {
-    this.loggedService.clearLoggedUser();
-    this.loggedUserId = null;
+    this.authService.clearAuthenticatedUser();
+    this.userId = null;
     this.notificationService.notifySuccess(`You've been logged out.`);
     this.router.navigate(['/login']);
   }
 
   onAdd() {
-    if (!this.loggedUserId) this.notificationService.notifySuccess('You need to log in to create a post!');
-    const commands = this.loggedUserId ? ['threads', 'add'] : ['login'];
+    if (!this.userId) { this.notificationService.notifySuccess('You need to log in to create a post!'); }
+    const commands = this.userId ? ['threads', 'add'] : ['login'];
     this.router.navigate(commands);
   }
 }

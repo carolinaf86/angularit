@@ -11,7 +11,7 @@ import {
   faSave, faSignInAlt, faSignOutAlt,
   faTimes,
   faTrash, faTrophy, faUser,
-  faUserAstronaut, faUserPlus
+  faUserPlus
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faUserCircle);

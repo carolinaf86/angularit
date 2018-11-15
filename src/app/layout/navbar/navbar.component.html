@@ -1,11 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-light">
+
   <a class="navbar-brand" routerLink="/">Angular<span>-it</span></a>
+
   <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" aria-controls="navbarNav" aria-expanded="false"
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div [ngbCollapse]="isCollapsed" class="navbar-collapse" id="navbarNav">
+
     <ul class="navbar-nav ml-lg-auto">
+
       <li>
         <button class="d-none d-lg-inline btn btn-secondary mr-2" type="button" (click)="onAdd()">
           <fa-icon icon="plus"></fa-icon> Create post
@@ -14,18 +19,23 @@
           <fa-icon icon="plus"></fa-icon> Create post
         </a>
       </li>
+
       <li class="nav-item">
-        <a *ngIf="!loggedUserId;else logoutLink" class="nav-link" routerLink="/login"><fa-icon icon="sign-in-alt"></fa-icon> Log in</a>
+        <a *ngIf="!userId;else logoutLink" class="nav-link" routerLink="/login"><fa-icon icon="sign-in-alt"></fa-icon> Log in</a>
         <ng-template #logoutLink>
           <a class="nav-link" #logoutLink (click)="logout()"><fa-icon icon="sign-out-alt"></fa-icon> Logout</a>
         </ng-template>
       </li>
-      <li *ngIf="!loggedUserId" class="nav-item">
+
+      <li *ngIf="!userId" class="nav-item">
         <a class="nav-link" routerLink="/register"><fa-icon icon="user-plus"></fa-icon> Register</a>
       </li>
-      <li *ngIf="loggedUserId" class="nav-item">
-        <a class="nav-link" [routerLink]="'/users/' + loggedUserId"><fa-icon icon="user"></fa-icon> Profile</a>
+
+      <li *ngIf="userId" class="nav-item">
+        <a class="nav-link" [routerLink]="'/users/' + userId"><fa-icon icon="user"></fa-icon> Profile</a>
       </li>
+
     </ul>
+
   </div>
 </nav>

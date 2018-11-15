@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormlyFieldConfig} from '@ngx-formly/core';
-import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../shared/sdk/models/User';
 import {UserService} from '../shared/sdk/services/user.service';
 import {AuthService} from '../shared/services/auth.service';
@@ -14,8 +14,10 @@ import {NotificationService} from '../shared/services/notification.service';
   styleUrls: ['register.component.scss']
 })
 export class RegisterComponent {
+
   model = new User();
   form = new FormGroup({});
+
   fields: FormlyFieldConfig[] = [
     {
       key: 'user_name',
@@ -56,27 +58,38 @@ export class RegisterComponent {
       }
     }
   ];
-  private returnUrl: string;
 
-  constructor(private userService: UserService, private loggedService: AuthService, private route: ActivatedRoute,
-              private router: Router, private notificationService: NotificationService) {
+  private readonly returnUrl: string;
+
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private notificationService: NotificationService) {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   submit(data) {
-    this.userService.register(data)
+
+    const { form, userService, notificationService, authService, router, returnUrl } = this;
+
+    if (form.invalid) { return; }
+
+    userService.register(data)
       .subscribe((result: AuthToken) => {
+
         if (!result.auth_token) {
-          this.notificationService.notifyError(null, 'An unexpected error has occurred. Please try again later.');
+          notificationService.notifyError(null, 'An unexpected error has occurred. Please try again later.');
         } else {
-          this.notificationService.notifySuccess('Success!');
-          this.loggedService.setLoggedUser(result);
-          this.router.navigateByUrl(this.returnUrl);
+          notificationService.notifySuccess('Success!');
+          authService.setAuthenticatedUser(result);
+          router.navigateByUrl(returnUrl);
         }
+
       },
         err => {
-          this.notificationService.notifyError(err, 'An unexpected error has occurred. Please try again later.');
+          notificationService.notifyError(err, 'An unexpected error has occurred. Please try again later.');
         });
   }
 

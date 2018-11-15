@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 <div class="container-fluid angularit-container">
+
   <div class="row h-100">
+
     <div class="col-xl-6 col-lg-8 offset-xl-3 offset-lg-2 cards-container h-100">
 
       <div class="card top-card" *ngIf="!editing;else editThread">
@@ -13,42 +15,58 @@
           <hr>
 
           <ul class="list-inline thread-info">
+
             <li class="list-inline-item mb-1">
               <fa-icon class="user-icon" icon="user-circle"></fa-icon>
               <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
             </li>
+
             <li class="list-inline-item mb-1">
               <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
               Posted {{ model.timestamp | timeDifference }} ago.
             </li>
+
           </ul>
 
-          <p class="thread-body"  [innerHtml]=" model.thread_body | safeHtml"></p>
+          <p class="thread-body" [innerHtml]=" model.thread_body | safeHtml"></p>
+
           <button *ngIf="showActions" type="button" class="btn btn-sm btn-secondary float-right" (click)="onDelete()">
-            <fa-icon icon="trash"></fa-icon> Delete
+            <fa-icon icon="trash"></fa-icon>
+            Delete
           </button>
+
           <button *ngIf="showActions" type="button" class="btn btn-sm btn-primary mr-2 float-right" (click)="onEdit()">
-            <fa-icon icon="edit"></fa-icon> Edit
+            <fa-icon icon="edit"></fa-icon>
+            Edit
           </button>
 
           <!-- mobile only -->
           <app-votes class="d-lg-none" [model]="model"></app-votes>
+
         </div>
       </div>
 
       <ng-template #editThread>
+
         <div class="card top-card">
           <div class="card-body">
+
             <form [formGroup]="form" (ngSubmit)="submit(data)">
               <formly-form [form]="form" [fields]="fields" [model]="data">
-                <button type="submit" [disabled]="!form.valid" class="btn btn-sm btn-primary float-right">
-                  <fa-icon icon="save"></fa-icon> Submit
+
+                <button type="submit" class="btn btn-sm btn-primary float-right">
+                  <fa-icon icon="save"></fa-icon>
+                  Submit
                 </button>
+
                 <button type="button" (click)="onCancel()" class="btn btn-sm btn-default mr-2 float-right">
-                  <fa-icon icon="times"></fa-icon> Cancel
+                  <fa-icon icon="times"></fa-icon>
+                  Cancel
                 </button>
+
               </formly-form>
             </form>
+
           </div>
         </div>
       </ng-template>

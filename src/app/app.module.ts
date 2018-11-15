@@ -56,4 +56,5 @@ import {TruncatePipe} from './shared/pipes/truncate.pipe';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

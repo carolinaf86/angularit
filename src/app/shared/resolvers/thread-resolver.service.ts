@@ -13,9 +13,9 @@ export class ThreadResolverService implements Resolve<Thread> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Thread> | Observable<never> {
     const id = route.params['id'];
-    if (id === 'add') {
-      return of(new Thread());
-    }
-    return this.threadService.getThreadById(id);
+
+    return id === 'add'
+      ? of(new Thread())
+      : this.threadService.getThreadById(id);
   }
 }

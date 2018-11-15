@@ -6,25 +6,29 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class HeadersInterceptor implements HttpInterceptor {
 
-  constructor(private loggedService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler):
-    Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     req = req.clone({
       setHeaders: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
     });
-    const authToken = this.loggedService.getAuthToken();
+
+    const authToken = this.authService.getAuthToken();
+
     if (authToken) {
+      // set auth header
       req = req.clone({
         setHeaders: {
           'auth_token': authToken,
-          'id': this.loggedService.getLoggedUserId()
+          'id': this.authService.getAuthenticatedUserId()
         }
       });
     }
+
     return next.handle(req);
   }
 }

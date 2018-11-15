@@ -3,10 +3,13 @@ import * as moment from 'moment';
 
 @Pipe({name: 'timeDifference'})
 export class TimeDifferencePipe implements PipeTransform {
+
   transform(value: string): string {
+
     const postedMoment = moment(value);
     const difference = moment.duration(moment().diff(postedMoment));
     const days = difference.asDays();
+
     if (days < 1) {
 
       if (difference.asHours() < 1) {
@@ -26,9 +29,9 @@ export class TimeDifferencePipe implements PipeTransform {
         ? 'an hour'
         : `${roundedHours} hours`;
     }
+
     const roundedDays = Math.round(days);
-    return roundedDays === 1
-      ? 'a day'
-      : `${roundedDays} days`;
+
+    return roundedDays === 1 ? 'a day' : `${roundedDays} days`;
   }
 }

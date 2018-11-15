@@ -19,14 +19,18 @@ export class CommentComponent implements OnInit {
   editing: boolean;
 
   data: Comment;
+
   form = new FormGroup({});
   fields: FormlyFieldConfig[];
+
   isNew: boolean;
   showEdit: boolean;
-  loggedUserId: string;
+  userId: string;
 
-  constructor(private commentService: CommentService, private loggedService: AuthService,
+  constructor(private commentService: CommentService,
+              private authService: AuthService,
               private notificationService: NotificationService) {
+
     this.fields = [
       {
         key: 'comment_body',
@@ -60,20 +64,21 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.editing = this.isNew = !this.model.comment_id;
 
     // Ensure model is not edited in place in case changes are cancelled
     this.data = {...this.model};
 
     // Only allow edit on comments for logged user
-    this.loggedUserId = this.loggedService.getLoggedUserId();
+    this.userId = this.authService.getAuthenticatedUserId();
 
     if (this.noEdit) {
       this.showEdit = false;
       return;
     }
 
-    this.showEdit = +this.model.user_id === +this.loggedUserId;
+    this.showEdit = +this.model.user_id === +this.userId;
   }
 
   onEdit() {
@@ -87,29 +92,33 @@ export class CommentComponent implements OnInit {
 
   submit(data: Comment) {
 
+    const {isNew, userId, notificationService, model, commentService, form } = this;
+
+    if (form.invalid) { return; }
+
     this.editing = false;
 
     // Check user has rights to create
-    if (this.isNew && !this.loggedUserId) {
-      return this.notificationService.notifyError(null, 'You must be logged in to comment.');
+    if (isNew && !userId) {
+      return notificationService.notifyError(null, 'You must be logged in to comment.');
     }
 
     // Check user has rights to update
-    if (!this.isNew && (+this.loggedUserId !== +this.model.user_id)) {
+    if (!isNew && (+userId !== +model.user_id)) {
       this.showEdit = false;
-      return this.notificationService.notifyError(null, `You cannot update another user's comment!`);
+      return notificationService.notifyError(null, `You cannot update another user's comment!`);
     }
 
-    const updateOrCreate = this.isNew ? this.commentService.create(data) : this.commentService.update(data);
+    const updateOrCreate = isNew ? commentService.create(data) : commentService.update(data);
 
     updateOrCreate
       .subscribe((result: Comment) => {
-        this.notificationService.notifySuccess('Comment saved successfully!');
+        notificationService.notifySuccess('Comment saved successfully!');
         this.model = result;
         this.showEdit = true;
         this.isNew = false;
       }, err => {
-        this.notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
+        notificationService.notifyError(err, 'Failed to save comment. Please try again later.');
       });
   }
 

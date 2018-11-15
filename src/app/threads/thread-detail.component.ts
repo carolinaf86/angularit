@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Thread} from '../shared/sdk/models/Thread';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../shared/services/auth.service';
-import {FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormlyFieldConfig} from '@ngx-formly/core';
 import {ThreadService} from '../shared/sdk/services/thread.service';
 import {Comment} from '../shared/sdk/models/Comment';
@@ -27,7 +27,7 @@ export class ThreadDetailComponent implements OnInit {
   editing: boolean;
   showActions: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: AuthService, private threadService: ThreadService,
+  constructor(private route: ActivatedRoute, private authService: AuthService, private threadService: ThreadService,
               private router: Router, private notificationService: NotificationService) {
     this.fields = [
       {
@@ -42,7 +42,9 @@ export class ThreadDetailComponent implements OnInit {
         validators: {
           max: {
             expression: (control: FormControl): boolean => {
-              if (!control.value) { return true; }
+              if (!control.value) {
+                return true;
+              }
               return control.value.length < 255;
             },
             message: 'Title cannot be longer than 255 characters.'
@@ -71,7 +73,9 @@ export class ThreadDetailComponent implements OnInit {
         validators: {
           max: {
             expression: (control: FormControl): boolean => {
-              if (!control.value) { return true; }
+              if (!control.value) {
+                return true;
+              }
               return control.value.length < 64000;
             },
             message: 'Body cannot be longer than 64,000 characters.'
@@ -83,7 +87,9 @@ export class ThreadDetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.route.data.subscribe((data: { thread: Thread }) => {
+    const { authService, notificationService, route } = this;
+
+    route.data.subscribe((data: { thread: Thread }) => {
 
       // Set editing to true if id is 'add';
       this.editing = this.isNew = this.route.snapshot.paramMap.get('id') === 'add';
@@ -95,13 +101,13 @@ export class ThreadDetailComponent implements OnInit {
 
       // Create an empty comment
       this.addComment = new Comment({thread_id: data.thread.thread_id});
-      this.showActions = +this.model.user_id === +this.loggedService.getLoggedUserId();
+      this.showActions = +this.model.user_id === +authService.getAuthenticatedUserId();
 
     }, err => {
-      this.notificationService.notifyError(err, `Oops! We're having problems loading this thread right now.`)
+      notificationService.notifyError(err, `Oops! We're having problems loading this thread right now.`);
     });
 
-    this.isLoggedIn = this.loggedService.isLoggedIn();
+    this.isLoggedIn = authService.isAuthenticated();
 
   }
 
@@ -110,9 +116,11 @@ export class ThreadDetailComponent implements OnInit {
   }
 
   onCancel() {
+
     if (this.isNew) {
       return this.router.navigate(['/']);
     }
+
     // Reset form
     this.data = {...this.model};
     this.editing = false;
@@ -121,51 +129,58 @@ export class ThreadDetailComponent implements OnInit {
   onDelete() {
     // TODO confirm delete
 
-    if (this.isNew) {
+    const {router, isNew, authService, notificationService, threadService, model} = this;
+
+    if (isNew) {
       // Navigate to home
-      return this.router.navigateByUrl('/');
+      return router.navigateByUrl('/');
     }
     // Check user has right to perform action
-    if (+this.loggedService.getLoggedUserId() !== +this.model.user_id) {
-      this.notificationService.notifyError(null, 'You cannot delete a thread posted by another user!');
-      return this.router.navigateByUrl('/');
+    if (+authService.getAuthenticatedUserId() !== +model.user_id) {
+      notificationService.notifyError(null, 'You cannot delete a thread posted by another user!');
+      return router.navigateByUrl('/');
     }
-    this.threadService.delete(this.model.thread_id)
-      .subscribe(result => {
-        this.notificationService.notifySuccess('Thread successfully deleted!');
-        this.router.navigate(['/']);
+    threadService.delete(model.thread_id)
+      .subscribe(() => {
+        notificationService.notifySuccess('Thread successfully deleted!');
+        router.navigate(['/']);
       }, err => {
-        this.notificationService.notifyError(err, 'Failed to delete thread. Please try again later.');
+        notificationService.notifyError(err, 'Failed to delete thread. Please try again later.');
       });
   }
 
   submit(data: Thread) {
+
+    const { form, isNew, authService, notificationService, router, model, threadService} = this;
+
+    if (form.invalid) { return; }
+
     // Check user has right to perform action
-    if (!this.isNew && this.loggedService.getLoggedUserId() !== this.model.user_id) {
-      this.notificationService.notifyError(null, 'You cannot update a thread posted by another user!');
-      return this.router.navigateByUrl('/');
+    if (!isNew && authService.getAuthenticatedUserId() !== model.user_id) {
+      notificationService.notifyError(null, 'You cannot update a thread posted by another user!');
+      return router.navigateByUrl('/');
     }
 
     const observable = data.thread_id
-      ? this.threadService.update(data)
-      : this.threadService.create(data);
+      ? threadService.update(data)
+      : threadService.create(data);
     observable.subscribe((result: Thread) => {
 
       if (result['form_errors']) {
-        return this.notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
+        return notificationService.notifyError(null, 'Thread not created. There are errors in the form.');
       }
 
       this.model = result;
       this.editing = false;
       this.showActions = true;
 
-      this.notificationService.notifySuccess('Thread saved successfully!');
+      notificationService.notifySuccess('Thread saved successfully!');
 
-      if (this.isNew) {
-        this.router.navigate(['threads', result.thread_id]);
+      if (isNew) {
+        router.navigate(['threads', result.thread_id]);
       }
-      }, err => {
-        this.notificationService.notifyError(err, 'Failed to save thread. Please try again later.');
+    }, err => {
+      notificationService.notifyError(err, 'Failed to save thread. Please try again later.');
     });
   }
 }

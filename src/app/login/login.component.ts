@@ -6,7 +6,6 @@ import {AuthToken, Credentials} from '../shared/sdk/models/Auth';
 import {AuthService} from '../shared/services/auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../shared/services/notification.service';
-import {ValidationMessageOption} from '@ngx-formly/core/lib/services/formly.config';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +13,10 @@ import {ValidationMessageOption} from '@ngx-formly/core/lib/services/formly.conf
   styleUrls: ['login.component.scss']
 })
 export class LoginComponent {
+
   model = new Credentials();
   form = new FormGroup({});
+
   fields: FormlyFieldConfig[] = [
     {
       key: 'email',
@@ -39,29 +40,39 @@ export class LoginComponent {
       }
     }
   ];
-  private returnUrl: string;
 
-  constructor(private userService: UserService, private loggedService: AuthService, private route: ActivatedRoute,
-              private router: Router, private notificationService: NotificationService) {
+  private readonly returnUrl: string;
+
+  constructor(private userService: UserService,
+              private authService: AuthService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private notificationService: NotificationService) {
     // TODO get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   submit(data) {
-    this.userService.login(data)
+
+    const { form, userService, notificationService, authService, router, returnUrl } = this;
+
+    if (form.invalid) { return; }
+
+    userService.login(data)
       .subscribe((result: AuthToken) => {
-        // Check if user has been found
-        if (!result.auth_token) {
-          this.notificationService.notifyError(null, `Oops! We didn't find a user with that email and password.`);
-        } else {
-          this.notificationService.notifySuccess('Logged in successfully.');
-          this.loggedService.setLoggedUser(result);
-          this.router.navigateByUrl(this.returnUrl);
-        }
-      },
+          // Check if user has been found
+          if (!result.auth_token) {
+            notificationService.notifyError(null, `Oops! We didn't find a user with that email and password.`);
+          } else {
+            notificationService.notifySuccess('Logged in successfully.');
+            authService.setAuthenticatedUser(result);
+            router.navigateByUrl(returnUrl);
+          }
+        },
         err => {
-          this.notificationService.notifyError(err, 'Failed to log in. Please try again later.');
+          notificationService.notifyError(err, 'Failed to log in. Please try again later.');
         });
+
   }
 
 }

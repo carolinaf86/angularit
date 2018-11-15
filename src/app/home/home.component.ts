@@ -14,7 +14,9 @@ export class HomeComponent implements OnInit {
   threads: Thread[];
   isLoggedIn: boolean;
 
-  constructor(private route: ActivatedRoute, private loggedService: AuthService, private router: Router,
+  constructor(private route: ActivatedRoute,
+              private authService: AuthService,
+              private router: Router,
               private notificationService: NotificationService) { }
 
   ngOnInit(): void {
@@ -24,7 +26,7 @@ export class HomeComponent implements OnInit {
       this.notificationService.notifyError(err, `Oops! We're having problems loading new posts right now.`);
       this.threads = [];
     });
-    this.isLoggedIn = this.loggedService.isLoggedIn();
+    this.isLoggedIn = this.authService.isAuthenticated();
   }
 
 }

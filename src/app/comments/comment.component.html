@@ -1,5 +1,7 @@
 <div class="card">
-  <div *ngIf="!editing;else editable" class="card-body">
+
+  <div *ngIf="!editing;else commentForm" class="card-body">
+
     <app-votes class="float-right" [model]="model" type="comment"></app-votes>
 
     <ul class="list-inline" *ngIf="model.user_id && model.user_name">
@@ -8,31 +10,36 @@
         <a [routerLink]="'/users/' + model.user_id" class="user-link">{{ model.user_name }}</a>
       </li>
       <li class="list-inline-item">
-        <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon> {{ model.timestamp | timeDifference }} ago
+        <fa-icon class="clock-icon" [icon]="['far', 'clock']"></fa-icon>
+        {{ model.timestamp | timeDifference }} ago
       </li>
     </ul>
 
-
-
     <p class="card-text" [innerHtml]="model.comment_body | safeHtml"></p>
     <button *ngIf="showEdit" type="button" (click)="onEdit()" class="btn btn-sm btn-primary float-right">
-      <fa-icon icon="edit"></fa-icon> Edit
+      <fa-icon icon="edit"></fa-icon>
+      Edit
     </button>
 
   </div>
 
-  <ng-template #editable>
+  <ng-template #commentForm>
+
     <div class="card-body">
+
       <form [formGroup]="form" (ngSubmit)="submit(data)">
         <formly-form [form]="form" [fields]="fields" [model]="data">
-          <button type="submit" [disabled]="!form.valid" class="btn btn-sm btn-primary float-right">
-            <fa-icon icon="save"></fa-icon> Submit
+          <button type="submit" class="btn btn-sm btn-primary float-right">
+            <fa-icon icon="save"></fa-icon>
+            Submit
           </button>
           <button *ngIf="!isNew" type="button" (click)="onCancel()" class="btn btn-sm btn-default mr-2 float-right">
-            <fa-icon icon="times"></fa-icon> Cancel
+            <fa-icon icon="times"></fa-icon>
+            Cancel
           </button>
         </formly-form>
       </form>
+
     </div>
   </ng-template>
 </div>

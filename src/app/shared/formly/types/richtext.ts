@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FieldType} from '@ngx-formly/core';
 
 @Component({
@@ -14,7 +14,7 @@ import {FieldType} from '@ngx-formly/core';
     </quill-editor>
   `,
 })
-export class FormlyRichTextComponent extends FieldType {
+export class FormlyRichTextComponent extends FieldType implements OnInit {
 
   ngOnInit(): void {
     this.to.modules = this.to.modules || {};
