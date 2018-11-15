@@ -30,7 +30,7 @@
 
           <p class="thread-body" [innerHtml]=" model.thread_body | safeHtml"></p>
 
-          <button *ngIf="showActions" type="button" class="btn btn-sm btn-secondary float-right" (click)="onDelete()">
+          <button *ngIf="showActions" type="button" class="btn btn-sm btn-danger float-right" (click)="onDelete()">
             <fa-icon icon="trash"></fa-icon>
             Delete
           </button>
@@ -54,7 +54,7 @@
             <form [formGroup]="form" (ngSubmit)="submit(data)">
               <formly-form [form]="form" [fields]="fields" [model]="data">
 
-                <button type="submit" class="btn btn-sm btn-primary float-right">
+                <button type="submit" class="btn btn-sm btn-secondary float-right">
                   <fa-icon icon="save"></fa-icon>
                   Submit
                 </button>

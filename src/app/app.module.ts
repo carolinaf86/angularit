@@ -7,7 +7,7 @@ import {RequirementsModule} from './shared/modules/requirements.module';
 import {HttpClientModule} from '@angular/common/http';
 import {HomeComponent} from './home/home.component';
 import {LayoutModule} from '@angular/cdk/layout';
-import {NavbarComponent} from './layout/navbar/navbar.component';
+import {NavbarComponent} from './navbar/navbar.component';
 import {ThreadListItemComponent} from './threads/thread-list-item/thread-list-item.component';
 import {ThreadDetailComponent} from './threads/thread-detail.component';
 import {TimeDifferencePipe} from './shared/pipes/time-difference.pipe';

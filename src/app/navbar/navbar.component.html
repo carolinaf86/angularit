@@ -32,7 +32,7 @@
       </li>
 
       <li *ngIf="userId" class="nav-item">
-        <a class="nav-link" [routerLink]="'/users/' + userId"><fa-icon icon="user"></fa-icon> Profile</a>
+        <a class="nav-link" [routerLink]="'/users/' + userId"><fa-icon icon="user"></fa-icon> {{ username }}</a>
       </li>
 
     </ul>

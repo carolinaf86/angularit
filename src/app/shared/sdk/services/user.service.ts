@@ -25,7 +25,7 @@ export class UserService {
     return path;
   }
 
-  getUserById(id: number): Observable<User> {
+  getUserById(id: string): Observable<User> {
     const url = this.url([this.resourceName, 'get_user_profile'], `user_id=${id}`);
     return this.http.get<User>(url)
       .pipe(
@@ -34,14 +34,14 @@ export class UserService {
       );
   }
 
-  getUserThreadHistoryById(id: number): Observable<Thread[]> {
+  getUserThreadHistoryById(id: string): Observable<Thread[]> {
     const url = this.url([this.resourceName, 'get_user_thread_history'], `user_id=${id}`);
     return this.http.get<Thread[]>(url)
       .pipe(map(res => res['message']),
         catchError(this.errorService.handleError));
   }
 
-  getUserCommentHistoryById(id: number): Observable<Comment[]> {
+  getUserCommentHistoryById(id: string): Observable<Comment[]> {
     const url = this.url([this.resourceName, 'get_user_comment_history'], `user_id=${id}`);
     return this.http.get<Comment[]>(url)
       .pipe(map(res => res['message']),

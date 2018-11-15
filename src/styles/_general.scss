@@ -68,10 +68,14 @@ a {
       box-shadow: none;
     }
   }
-  .btn-circle {
-    border-radius: 50%;
-    // TODO add box shadow
-    // box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  .btn-danger {
+    background-color: $danger;
+    border-color: $danger;
+    color: $white;
+    font-weight: 500;
+    &:focus {
+      box-shadow: 0 0 0 2px $danger;
+    }
   }
 }
 
@@ -97,8 +101,15 @@ button.vote-btn {
 
   }
 
-  &.downvote .vote-icon {
-    color: red;
+  &.downvote {
+    &:hover {
+      fa-icon {
+        color: red;
+      }
+    }
+    .vote-icon {
+      color: $danger;
+    }
   }
 }
 
