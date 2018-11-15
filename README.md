@@ -3,6 +3,7 @@
  * [Requirements](#Requirements)
  * [Quickstart](#Quickstart)
  * [Useful Commands](Useful-Commands)
+ * [Test User](Test-User)
 
 ## REQUIREMENTS
 
@@ -42,3 +43,12 @@ In order to develop with docker this project requires that you have the latest v
   * `docker-compose stop` will stop the docker container
   * `docker-compose restart` will restart the docker container
   * `docker-compose logs -f` will tails the logs of the docker container
+  
+  ## TEST USER
+  
+  A test account has been set up with the following credentials:
+  
+  * email: test@test.com
+  * password: password123
+  
+  Or navigate to [registration](http://localhost:4200/register) to register a new user
