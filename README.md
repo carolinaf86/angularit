@@ -6,15 +6,11 @@
 
 ## REQUIREMENTS
 
-In order to develop with docker, for Linux and Windows this project requires that you have the latest versions of the following installed:
+In order to develop with docker this project requires that you have the latest versions of the following installed:
 
  * [Docker](https://www.docker.com)
  * [Docker Compose](https://docs.docker.com/compose)
- 
-For Mac OS you must have the following installed:
-
- * [Dinghy](https://github.com/codekitchen/dinghy)
- 
+  
  ## QUICKSTART
  
  If developing with docker, from the root directory of the repository run the following:
@@ -29,9 +25,10 @@ For Mac OS you must have the following installed:
  docker-compose logs -f
  ```
  
- Alternatively, from the root directory of the repository run the following:
+ If you prefer to develop without Docker, from the root directory of the repository run the following:
  
   ```bash
+  npm install 
   npm run start
   ```
  
