@@ -71,8 +71,9 @@
         </div>
       </ng-template>
 
-      <ng-container *ngIf="isLoggedIn && !editing">
-        <app-comment [model]="addComment"></app-comment>
+      <app-comment *ngIf="isLoggedIn && !editing" [model]="addComment"></app-comment>
+
+      <ng-container *ngIf="!editing">
         <app-comment *ngFor="let comment of model.comments" [model]="comment"></app-comment>
       </ng-container>
 
