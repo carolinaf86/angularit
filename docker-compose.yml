@@ -7,7 +7,7 @@ services:
     - ./:/usr/src/app
     user: node
     working_dir: /usr/src/app
-    entrypoint: sh -c "npm install && npm start"
+    entrypoint: sh -c "yarn install && yarn start"
     restart: on-failure
     ports:
       - '4200:4200'
