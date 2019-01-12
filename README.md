@@ -30,8 +30,8 @@ In order to develop with docker this project requires that you have the latest v
  If you prefer to develop without Docker, from the root directory of the repository run the following:
  
   ```bash
-  npm install 
-  npm run start
+  yarn install 
+  yarn start
   ```
  
  Navigate to [http://localhost:4200](http://localhost:4200) to view the project.
